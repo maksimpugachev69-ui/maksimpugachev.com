@@ -1,0 +1,163 @@
+/*!
+ * Antishkola Motion Library — v1.0 — supporting styles
+ *
+ * Two layers:
+ *   1. Base styles the JS engine relies on (cursor, preloader, marquee, etc.)
+ *   2. A modern NATIVE layer (CSS scroll-driven animations + @starting-style)
+ *      that works with zero JS as a progressive-enhancement fallback.
+ *
+ * Tune via custom properties on :root (see the :root block below).
+ */
+
+:root {
+  --m-ease: cubic-bezier(0.22, 1, 0.36, 1);      /* premium ease-out (expo-ish) */
+  --m-ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --m-dur: 0.7s;
+  --m-reveal-y: 28px;
+  --m-cursor-size: 14px;
+  --m-cursor-color: #ed1ec6;
+  --m-progress-color: #fff600;
+}
+
+/* ════════════════════════════════════════════════════════════
+   1. BASE — styles the JS engine depends on
+   ════════════════════════════════════════════════════════════ */
+
+/* Lock scroll during preloader / open mobile nav */
+body.locked { overflow: hidden; height: 100%; }
+
+/* ── Preloader ── */
+[data-preloader] {
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  background: #0a0a0a;
+}
+[data-preloader-logo] { opacity: 0; }
+[data-preloader-bar] {
+  display: block; height: 2px; width: 0%;
+  background: var(--m-progress-color); margin-top: 1.5rem;
+}
+
+/* ── Custom cursor ── */
+[data-cursor] {
+  position: fixed; top: 0; left: 0; z-index: 9998;
+  width: var(--m-cursor-size); height: var(--m-cursor-size);
+  border-radius: 50%;
+  background: var(--m-cursor-color);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transition: width .3s var(--m-ease), height .3s var(--m-ease), background .3s;
+  will-change: transform;
+}
+[data-cursor].is-grow {
+  width: calc(var(--m-cursor-size) * 3.4);
+  height: calc(var(--m-cursor-size) * 3.4);
+  background: var(--m-progress-color);
+}
+
+/* ── Scroll progress bar ── */
+[data-scroll-progress] {
+  position: fixed; top: 0; left: 0; z-index: 9997;
+  height: 3px; width: 100%;
+  background: var(--m-progress-color);
+  transform: scaleX(0); transform-origin: 0 50%;
+  will-change: transform;
+}
+
+/* ── Sticky header states ── */
+[data-header] { transition: transform .4s var(--m-ease), background .3s, backdrop-filter .3s; }
+[data-header].hide { transform: translateY(-100%); }
+
+/* ── Marquee ── */
+[data-marquee] { display: flex; overflow: hidden; width: 100%; white-space: nowrap; }
+[data-marquee] > * { flex: 0 0 auto; will-change: transform; }
+@keyframes m-marquee { to { transform: translateX(calc(var(--m-marquee-w, 100%) * -1)); } }
+
+/* ── Accordion ── */
+[data-acc-a] { max-height: 0; overflow: hidden; transition: max-height .45s var(--m-ease-soft); }
+
+/* ── Magnetic / tilt base ── */
+[data-magnetic] { will-change: transform; }
+[data-tilt] { transform-style: preserve-3d; will-change: transform; }
+
+/* ── Form shake fallback (when GSAP absent) ── */
+@keyframes m-shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(3px)} }
+.m-shake { animation: m-shake .4s var(--m-ease-soft); }
+
+/* ════════════════════════════════════════════════════════════
+   2. NATIVE FALLBACK — zero-JS reveal via scroll-driven animations
+   Use class .m-reveal / .m-reveal-stagger when GSAP may be absent.
+   GSAP-driven [data-reveal] elements are NOT touched here.
+   ════════════════════════════════════════════════════════════ */
+
+/* Entry baseline (in case JS never runs, content is still visible) */
+.m-reveal { opacity: 1; }
+
+@supports (animation-timeline: view()) {
+  .m-reveal {
+    opacity: 0;
+    animation: m-reveal-in linear forwards;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+  .m-reveal-stagger > * {
+    opacity: 0;
+    animation: m-reveal-in linear forwards;
+    animation-timeline: view();
+    animation-range: entry 5% entry 60%;
+  }
+  /* stagger via per-child range offsets */
+  .m-reveal-stagger > *:nth-child(2) { animation-range: entry 12% entry 64%; }
+  .m-reveal-stagger > *:nth-child(3) { animation-range: entry 19% entry 68%; }
+  .m-reveal-stagger > *:nth-child(4) { animation-range: entry 26% entry 72%; }
+  .m-reveal-stagger > *:nth-child(5) { animation-range: entry 33% entry 76%; }
+  .m-reveal-stagger > *:nth-child(n+6) { animation-range: entry 40% entry 80%; }
+
+  /* Native scroll-linked progress bar (no JS) */
+  .m-progress-native {
+    transform-origin: 0 50%;
+    animation: m-scalex linear;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes m-reveal-in {
+  from { opacity: 0; transform: translateY(var(--m-reveal-y)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes m-scalex { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ── @starting-style entry (popovers / dialogs / dynamically inserted) ── */
+@supports (transition-behavior: allow-discrete) {
+  .m-enter {
+    opacity: 1; transform: translateY(0);
+    transition: opacity .5s var(--m-ease), transform .5s var(--m-ease);
+  }
+  @starting-style {
+    .m-enter { opacity: 0; transform: translateY(16px); }
+  }
+}
+
+/* ── Text highlight reveal (marker sweep) ── */
+.m-highlight {
+  background-image: linear-gradient(var(--m-progress-color), var(--m-progress-color));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 0% 0.5em;
+  transition: background-size .6s var(--m-ease);
+}
+.m-highlight.is-in, .is-in .m-highlight { background-size: 100% 0.5em; }
+
+/* ════════════════════════════════════════════════════════════
+   3. ACCESSIBILITY — kill all motion on demand
+   ════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .m-reveal, .m-reveal-stagger > *, [data-reveal], [data-reveal-stagger] > * { opacity: 1 !important; transform: none !important; }
+  [data-cursor], [data-marquee] [aria-hidden="true"] { display: none !important; }
+}

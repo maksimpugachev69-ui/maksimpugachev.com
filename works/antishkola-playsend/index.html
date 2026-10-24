@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PlaySEND — английский для детей в играх, в которые он уже играет</title>
+<meta name="description" content="Игровая школа английского: преподаватель-носитель играет с ребёнком в Minecraft, Roblox и Brawl Stars — и язык включается сам. Первый урок бесплатно.">
+<meta name="theme-color" content="#FBF8F2">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PlaySEND — английский для детей в играх, в которые он уже играет">
+<meta property="og:description" content="Носитель играет с ребёнком в Minecraft, Roblox и Brawl Stars — и английский включается сам. Первый урок бесплатно.">
+<meta property="og:image" content="assets/img/kid-real-1.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/unbounded-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/onest-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/onest-600-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<style>
+#playsend{
+  --paper:#FBF8F2; --paper-2:#F3EEE4; --ink:#20201E; --muted:#5E5950;
+  --violet:#6B4EFF; --sky:#2E9BD6; --green:#4FB783; --coral:#FF7A5C; --sun:#FFC400; --star:#F5A623;
+  --m-progress-color:#6B4EFF;
+  background:var(--paper); color:var(--ink); font-family:"Onest",sans-serif;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden;
+}
+#playsend *{box-sizing:border-box;margin:0;padding:0}
+#playsend ::selection{background:var(--sun);color:var(--ink)}
+#playsend a{color:inherit;text-decoration:none}
+#playsend .wrap{max-width:1280px;margin:0 auto;padding:0 22px}
+@media(min-width:900px){#playsend .wrap{padding:0 40px}}
+#playsend .disp{font-family:"Unbounded",sans-serif}
+#playsend h2{font-family:"Unbounded";font-weight:800;line-height:1.02;letter-spacing:-.03em;font-size:clamp(1.8rem,3.6vw,2.9rem);text-wrap:balance}
+#playsend .kick{font-family:"Onest";font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--violet);margin-bottom:14px;display:block}
+#playsend .lead{font-size:clamp(1.02rem,1.3vw,1.15rem);line-height:1.62;color:#46423a;max-width:60ch}
+#playsend .btn{font-family:"Unbounded";font-weight:700;font-size:15px;border:2px solid var(--ink);border-radius:100px;padding:13px 22px;display:inline-flex;align-items:center;gap:9px;cursor:pointer;background:#fff;box-shadow:3px 3px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+#playsend .btn:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+#playsend .btn-violet{background:var(--violet);color:#fff}
+#playsend .pill{font-weight:600;font-size:13px;border:1.5px solid #DCD5C7;border-radius:100px;padding:7px 13px;background:#fff;white-space:nowrap;display:inline-block}
+#playsend .pill.sky{background:#D7EDF7}#playsend .pill.green{background:#DAF0E4}#playsend .pill.sun{background:#FFEFB0}#playsend .pill.coral{background:#FFE2D9}
+#playsend section{padding:64px 0;scroll-margin-top:80px}
+#playsend a:focus-visible,#playsend button:focus-visible,#playsend summary:focus-visible,#playsend input:focus-visible,#playsend select:focus-visible,#playsend textarea:focus-visible,#playsend .rate label:focus-within{outline:3px solid var(--violet);outline-offset:2px;border-radius:6px}
+#playsend .mcta{display:none}
+@media(max-width:979px){
+  #playsend .mcta{display:block;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(251,248,242,.94);backdrop-filter:blur(8px);border-top:2px solid var(--ink)}
+  #playsend .mcta .btn{width:100%;justify-content:center;box-shadow:3px 3px 0 var(--ink)}
+  #playsend .mcta.hide{transform:translateY(120%);transition:transform .3s}
+}
+@media(min-width:900px){#playsend section{padding:88px 0}}
+#playsend .flow{border-top:1px solid #E7E0D3}
+#playsend .soft{background:#F5F2FB}
+
+/* header */
+#playsend header{position:sticky;top:0;z-index:40;background:rgba(251,248,242,.86);backdrop-filter:blur(10px);border-bottom:2px solid var(--ink);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+#playsend header.hide{transform:translateY(-100%)}
+#playsend header .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+#playsend .brand{display:flex;align-items:center;gap:11px}
+#playsend .brand .logo{width:40px;height:40px;border-radius:12px;border:2px solid var(--ink);background:#EDE8FF;display:grid;place-items:center;overflow:hidden}
+#playsend .brand .logo img{width:34px;height:34px;object-fit:contain;animation:bob 3.2s ease-in-out infinite}
+#playsend .brand .name{font-family:"Unbounded";font-weight:800;font-size:20px;letter-spacing:-.02em;white-space:nowrap}
+#playsend .name .bdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sun);margin-left:3px;vertical-align:.06em}
+#playsend .brand .tag{font-size:10.5px;font-weight:600;color:var(--muted);line-height:1.15;border-left:1px solid #D9D2C4;padding-left:9px}
+#playsend nav{display:none;gap:26px;font-weight:600;font-size:15px}
+#playsend nav a:hover{color:var(--violet)}
+@media(min-width:980px){#playsend nav{display:flex}}
+#playsend header .btn{padding:10px 18px;font-size:14px}
+
+/* hero */
+#playsend .hero{padding:54px 0 36px;position:relative}
+#playsend .hero .wrap{position:relative;z-index:1}
+#playsend .cube{position:absolute;z-index:0;border:2px solid var(--ink);border-radius:7px;animation:float 6s ease-in-out infinite;will-change:transform}
+#playsend .cube.c1{--r:14deg;width:30px;height:30px;background:var(--sun);left:43%;top:14%}
+#playsend .cube.c2{--r:-10deg;width:20px;height:20px;background:var(--sky);left:50%;bottom:20%;animation-delay:1.3s}
+#playsend .cube.c3{--r:22deg;width:26px;height:26px;background:var(--coral);right:4%;top:7%;animation-delay:.6s}
+@keyframes float{0%,100%{transform:rotate(var(--r,10deg)) translateY(0)}50%{transform:rotate(var(--r,10deg)) translateY(-12px)}}
+@media(max-width:760px){#playsend .cube{display:none}}
+@media(min-width:980px){#playsend .hero{padding:52px 0 52px}}
+#playsend .hero .wrap{display:grid;grid-template-columns:1fr;gap:46px;align-items:center}
+@media(min-width:980px){#playsend .hero .wrap{grid-template-columns:1.04fr .96fr;gap:34px}}
+#playsend .h1-kick{display:flex;align-items:center;gap:9px;width:fit-content;font-family:"Onest",sans-serif;font-weight:600;font-size:13px;letter-spacing:0;background:#fff;border:1.5px solid #DCD5C7;border-radius:100px;padding:7px 15px 7px 11px;margin-bottom:22px;color:var(--ink)}
+#playsend .h1-kick .edot{width:8px;height:8px;border-radius:50%;background:var(--coral);flex-shrink:0}
+#playsend .hero h1{font-family:"Unbounded";font-weight:800;line-height:1.04;letter-spacing:-.035em;font-size:clamp(2.1rem,4.2vw,3.6rem);margin-bottom:18px;text-wrap:balance}
+#playsend .hero h1 .mk{position:relative;white-space:nowrap;color:var(--violet)}
+#playsend .hero h1 .mk::after{content:"";position:absolute;left:-3%;right:-3%;bottom:.04em;height:.34em;background:var(--sun);z-index:-1;border-radius:3px;transform:rotate(-1deg)}
+#playsend .hero h1 [data-w]{display:inline-block}
+#playsend .sub{font-size:clamp(1.04rem,1.35vw,1.18rem);line-height:1.6;color:#46423a;max-width:45ch;margin-bottom:30px}
+#playsend .cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;margin-bottom:26px}
+#playsend .link-how{font-weight:700;font-size:15px;display:inline-flex;align-items:center;gap:7px;border-bottom:2px solid var(--ink);padding-bottom:2px}
+#playsend .link-how:hover{color:var(--violet);border-color:var(--violet)}
+#playsend .trust{display:flex;flex-wrap:wrap;gap:9px}
+#playsend .collage{position:relative;min-height:478px}
+#playsend .card{position:absolute;border:2px solid var(--ink);border-radius:22px;overflow:hidden;background:#fff;box-shadow:6px 6px 0 var(--ink)}
+#playsend .card img{display:block;width:100%;height:100%;object-fit:cover}
+#playsend .card.photo{width:58%;aspect-ratio:4/5;left:1%;top:2%;z-index:3;will-change:transform}
+#playsend .card.game{width:54%;aspect-ratio:16/11;right:1%;top:30%;z-index:2;will-change:transform}
+#playsend .tape{position:absolute;width:80px;height:24px;background:rgba(255,196,0,.72);border:1px solid rgba(32,32,30,.22);top:-9px;left:36%;transform:rotate(-4deg);z-index:6}
+#playsend .joy-char{position:absolute;left:-10%;bottom:-9%;width:198px;z-index:8;filter:drop-shadow(8px 14px 14px rgba(32,32,30,.18));pointer-events:none}
+#playsend .joy-bubble{position:absolute;left:7%;bottom:16%;z-index:9;background:#fff;border:2px solid var(--ink);border-radius:15px;box-shadow:3px 3px 0 var(--ink);padding:10px 14px;font-weight:600;font-size:13.5px;line-height:1.32;max-width:185px}
+#playsend .joy-bubble b{color:var(--violet)}
+#playsend .joy-bubble::after{content:"";position:absolute;left:22px;bottom:-10px;width:15px;height:15px;background:#fff;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg)}
+#playsend .sticker{position:absolute;z-index:7;background:#fff;border:2px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);padding:8px 12px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px}
+#playsend .s-rate{right:2%;bottom:3%;transform:rotate(4deg);background:#DAF0E4}
+#playsend .s-rate .stars{color:var(--star);letter-spacing:1px}
+@media(max-width:760px){#playsend .joy-char{display:none}#playsend .joy-bubble{display:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+/* games strip */
+#playsend .games{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--paper-2)}
+#playsend .games .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:11px 15px;padding:17px 40px}
+#playsend .games .lbl{font-family:"Unbounded";font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+/* safety band */
+#playsend .safety{background:#EAF6EF;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:46px 0}
+#playsend .safety h2{font-family:"Unbounded";font-weight:700;font-size:clamp(1.2rem,3vw,1.65rem);margin-bottom:24px;max-width:24ch}
+#playsend .safe-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:760px){#playsend .safe-grid{grid-template-columns:1fr 1fr 1fr}}
+#playsend .safe-grid div{background:#fff;border:2px solid var(--ink);border-radius:16px;padding:18px 20px;box-shadow:5px 5px 0 var(--ink)}
+#playsend .safe-grid b{display:block;font-family:"Unbounded";font-weight:700;font-size:1rem;margin-bottom:7px}
+#playsend .safe-grid span{font-size:.92rem;color:var(--muted);line-height:1.5}
+/* real lesson video + tag */
+#playsend .lesson-vid{position:relative;margin:32px 0 4px;max-width:720px;border:2px solid var(--ink);border-radius:20px;overflow:hidden;box-shadow:6px 6px 0 var(--ink);background:#000}
+#playsend .how-main{display:grid;grid-template-columns:1.04fr .96fr;gap:30px;align-items:stretch;margin-top:32px}
+#playsend .how-main .lesson-vid{margin:0;max-width:none;display:flex;flex-direction:column}
+#playsend .how-main .lesson-vid video{flex:1 1 auto;min-height:0;object-fit:cover}
+#playsend .how-main .steps{display:flex;flex-direction:column;gap:14px;margin-top:0}
+#playsend .how-main .step{margin:0}
+@media(max-width:860px){#playsend .how-main{grid-template-columns:1fr;gap:18px}#playsend .how-main .lesson-vid video{flex:none}}
+#playsend .lesson-vid video{display:block;width:100%;height:auto}
+#playsend .lesson-vid figcaption{background:#fff;color:var(--muted);font-size:.9rem;font-weight:600;padding:12px 18px;border-top:2px solid var(--ink)}
+#playsend .vid-sound{position:absolute;top:12px;right:12px;z-index:3;display:flex;align-items:center;gap:6px;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:100px;padding:6px 12px;font-family:"Onest",sans-serif;font-weight:700;font-size:12.5px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);transition:transform .1s,box-shadow .1s,background .15s}
+#playsend .vid-sound:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+#playsend .vid-sound .vs-w{opacity:0}
+#playsend .vid-sound.is-on{background:var(--sun)}
+#playsend .vid-sound.is-on .vs-w{opacity:1}
+#playsend .real-tag{position:absolute;top:12px;left:12px;z-index:2;font-family:"Unbounded";font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em;background:var(--coral);color:var(--ink);border:2px solid var(--ink);border-radius:100px;padding:5px 11px;box-shadow:2px 2px 0 var(--ink)}
+/* trust bar */
+#playsend .trustbar{border-bottom:2px solid var(--ink);background:var(--paper)}
+#playsend .tb-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;padding:22px 40px}
+#playsend .tb-lead{font-weight:600;font-size:.95rem;color:var(--muted)}
+#playsend .tb-lead b{color:var(--ink)}
+#playsend .tb-stats{display:flex;flex-wrap:wrap;gap:24px 38px}
+#playsend .tb-stats div{display:flex;flex-direction:column;line-height:1.1}
+#playsend .tb-stats b{font-family:"Unbounded";font-weight:800;font-size:clamp(1.35rem,3.4vw,1.9rem);letter-spacing:-.01em}
+#playsend .tb-stats span{font-size:.8rem;color:var(--muted);margin-top:3px;max-width:15ch}
+@media(max-width:680px){#playsend .tb-inner{justify-content:flex-start}#playsend .tb-stats{gap:18px 26px}}
+
+/* how it works */
+#playsend .steps{display:grid;grid-template-columns:1fr;gap:18px;margin-top:38px}
+@media(min-width:820px){#playsend .steps{grid-template-columns:repeat(3,1fr);gap:22px}}
+#playsend .step{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:26px;box-shadow:5px 5px 0 var(--ink);position:relative}
+#playsend .step .n{font-family:"Unbounded";font-weight:800;font-size:15px;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;border:2px solid var(--ink);margin-bottom:16px}
+#playsend .step:nth-child(1) .n{background:var(--sky)}#playsend .step:nth-child(2) .n{background:var(--sun)}#playsend .step:nth-child(3) .n{background:var(--green)}
+#playsend .step h3{font-family:"Unbounded";font-weight:700;font-size:1.12rem;margin-bottom:9px;letter-spacing:-.01em}
+#playsend .step p{color:#544f46;line-height:1.55;font-size:.97rem}
+#playsend .step.s1{transform:rotate(-.7deg)}#playsend .step.s2{transform:rotate(.6deg)}#playsend .step.s3{transform:rotate(-.4deg)}
+@media(max-width:820px){#playsend .step.s1,#playsend .step.s2,#playsend .step.s3{transform:none}}
+#playsend .timeline{margin-top:34px;background:#fff;border:2px solid var(--ink);border-radius:20px;padding:26px 30px 30px;box-shadow:5px 5px 0 var(--ink)}
+#playsend .tl-head{font-family:"Unbounded";font-weight:700;font-size:1.05rem;margin:0 0 36px;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+#playsend .tl-note{font-family:"Onest";font-weight:500;font-size:.86rem;color:var(--muted)}
+#playsend .tl-track{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-right:54px}
+#playsend .tl-track::before{content:"";position:absolute;left:22px;right:22px;top:16px;height:12px;background:#ECE5D6;border:2px solid var(--ink);border-radius:100px}
+#playsend .tl-fill{position:absolute;left:24px;top:18px;height:8px;width:calc(100% - 48px);background:linear-gradient(90deg,var(--sky),var(--sun) 55%,var(--green));border-radius:100px;z-index:1;transform:scaleX(0);transform-origin:left center}
+#playsend .timeline.is-in .tl-fill{transform:scaleX(1);transition:transform 1.6s cubic-bezier(.16,1,.3,1)}
+#playsend .tl-node{position:relative;padding-top:58px}
+#playsend .tl-dot{position:absolute;top:0;left:0;width:44px;height:44px;border-radius:50%;background:#fff;border:3px solid var(--ink);z-index:2;display:grid;place-items:center;font-family:"Unbounded";font-weight:800;font-size:1.05rem;color:var(--ink);box-shadow:3px 3px 0 var(--ink);transition:background .4s,color .4s}
+#playsend .timeline.is-in .tl-node:nth-child(2) .tl-dot{background:var(--sky);color:#fff}
+#playsend .timeline.is-in .tl-node:nth-child(3) .tl-dot{background:var(--sun)}
+#playsend .timeline.is-in .tl-node:nth-child(4) .tl-dot{background:var(--green);color:#fff}
+#playsend .timeline.is-in .tl-dot{animation:xppop .55s cubic-bezier(.16,1,.3,1) both}
+#playsend .timeline.is-in .tl-node:nth-child(3) .tl-dot{animation-delay:.13s}
+#playsend .timeline.is-in .tl-node:nth-child(4) .tl-dot{animation-delay:.26s}
+@keyframes xppop{0%{transform:scale(1)}45%{transform:scale(1.2)}100%{transform:scale(1)}}
+#playsend .tl-node b{display:block;font-family:"Unbounded";font-weight:700;font-size:.96rem;margin-bottom:3px}
+#playsend .tl-node i{font-style:normal;color:#544f46;font-size:.92rem;line-height:1.4}
+#playsend .tl-goal{position:absolute;right:0;top:-2px;width:48px;height:48px;border-radius:50%;background:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);display:grid;place-items:center;z-index:3;color:#CBB89A;transition:background .4s,color .4s}
+#playsend .tl-goal svg{width:26px;height:26px}
+#playsend .tl-goal-cap{position:absolute;right:-7px;top:57px;width:62px;text-align:center;font-family:"Unbounded";font-weight:700;font-size:.82rem;letter-spacing:-.01em;color:var(--ink)}
+#playsend .timeline.is-in .tl-goal{background:var(--sun);color:var(--ink);animation:xppop .55s cubic-bezier(.16,1,.3,1) .4s both}
+@media(max-width:760px){
+  #playsend .tl-track{grid-template-columns:1fr;gap:22px;padding-right:0}
+  #playsend .tl-track::before{left:21px;right:auto;top:6px;bottom:6px;width:4px;height:auto}
+  #playsend .tl-fill,#playsend .tl-goal,#playsend .tl-goal-cap{display:none}
+  #playsend .tl-node{padding-top:0;padding-left:60px;min-height:46px;display:flex;flex-direction:column;justify-content:center}
+  #playsend .tl-dot{top:50%;transform:translateY(-50%)}
+  #playsend .timeline.is-in .tl-dot{animation:none}
+}
+
+/* reframe */
+#playsend .reframe{background:var(--violet);color:#fff}
+#playsend .reframe .wrap{display:grid;grid-template-columns:1fr;gap:24px;align-items:center}
+@media(min-width:820px){#playsend .reframe .wrap{grid-template-columns:1.2fr .8fr}}
+#playsend .reframe h2{color:#fff}
+#playsend .reframe .kick{color:#D9CEFF}
+#playsend .reframe .lead{color:#EDE8FF}
+#playsend .reframe ::selection{background:var(--sun);color:var(--ink)}
+#playsend .reframe .stat-col{display:flex;flex-direction:column;gap:18px}
+#playsend .reframe .stat{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.3);border-radius:20px;padding:24px}
+#playsend .reframe .stat .big{font-family:"Unbounded";font-weight:800;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1;margin-bottom:8px}
+#playsend .reframe .stat .cap{color:#EDE8FF;font-size:.98rem;line-height:1.5}
+#playsend .switch{display:flex;flex-direction:column;gap:11px;margin-top:24px}
+#playsend .switch span{display:flex;align-items:center;gap:11px;font-weight:600;font-size:.98rem;padding:12px 16px;border-radius:13px;border:2px solid rgba(255,255,255,.2)}
+#playsend .switch span::before{content:"";flex:none;width:9px;height:9px;border-radius:50%}
+#playsend .switch .was{background:rgba(255,255,255,.06);color:#C9BEF2;text-decoration:line-through;text-decoration-color:rgba(201,190,242,.5)}
+#playsend .switch .was::before{background:#9b8fd6}
+#playsend .switch .now{background:var(--sun);color:var(--ink);border-color:var(--sun);font-weight:700;text-decoration:none}
+#playsend .switch .now::before{background:var(--ink)}
+
+/* neuro + cards grids */
+#playsend .grid2{display:grid;grid-template-columns:1fr;gap:20px;margin-top:36px}
+@media(min-width:820px){#playsend .grid2{grid-template-columns:1fr 1fr;gap:24px}}
+#playsend .card-b{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:26px;box-shadow:5px 5px 0 var(--ink)}
+#playsend .card-b h3{font-family:"Unbounded";font-weight:700;font-size:1.1rem;margin-bottom:10px}
+#playsend .card-b p{color:#544f46;line-height:1.55}
+#playsend .callout{margin-top:24px;background:#FFF3D6;border:2px solid var(--ink);border-left:8px solid var(--sun);border-radius:14px;padding:20px 24px;box-shadow:5px 5px 0 var(--ink);font-size:1.05rem;line-height:1.5}
+#playsend .callout b{font-family:"Unbounded";font-weight:700;font-size:1.12rem;display:block;margin-bottom:6px}
+#playsend .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+
+/* teachers */
+#playsend .teachers{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:38px}
+@media(min-width:620px){#playsend .teachers{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:980px){#playsend .teachers{grid-template-columns:repeat(6,1fr);gap:18px}}
+#playsend .tch img{width:100%;aspect-ratio:1;object-fit:cover;border:2px solid var(--ink);border-radius:18px;box-shadow:5px 5px 0 var(--ink);filter:grayscale(1);transition:filter .45s ease,transform .25s ease}
+#playsend .tch:hover img{filter:grayscale(0);transform:translateY(-3px)}
+#playsend .tch figcaption{margin-top:11px}
+#playsend .tch b{display:block;font-family:"Unbounded";font-weight:700;font-size:.94rem}
+#playsend .tch span{display:block;font-size:.8rem;color:var(--muted);line-height:1.35;margin-top:2px}
+#playsend .tlink{display:inline-block;margin-top:30px;font-family:"Unbounded";font-weight:700;font-size:.95rem;color:var(--violet);text-decoration:none;border-bottom:3px solid var(--sun);padding-bottom:2px;transition:opacity .15s}
+#playsend .tlink:hover{opacity:.7}
+
+/* formats */
+#playsend .formats{background:var(--paper-2)}
+#playsend .fcard{background:#fff;border:2px solid var(--ink);border-radius:22px;padding:30px;box-shadow:6px 6px 0 var(--ink)}
+#playsend .fcard{position:relative}
+#playsend .fcard.feat{background:#FFF8E6;border-color:var(--ink)}
+#playsend .fbadge{position:absolute;top:-13px;left:24px;font-family:"Unbounded";font-weight:700;font-size:11px;letter-spacing:.02em;border:2px solid var(--ink);border-radius:100px;padding:5px 12px;box-shadow:2px 2px 0 var(--ink)}
+#playsend .fbadge.sky{background:var(--sky)}#playsend .fbadge.sun{background:var(--sun)}
+#playsend .guarantee{margin-top:22px;background:#E4F4EA;border:2px solid var(--ink);border-left:8px solid var(--green);border-radius:14px;padding:16px 22px;box-shadow:5px 5px 0 var(--ink);font-size:1rem;line-height:1.5}
+#playsend .guarantee b{font-family:"Unbounded";font-weight:700}
+#playsend .price-note{margin-top:20px;font-size:.93rem;color:var(--muted);max-width:64ch;line-height:1.55}
+#playsend .fcard .ft{font-family:"Unbounded";font-weight:700;font-size:1.25rem;margin:0 0 6px;letter-spacing:-.01em}
+#playsend .fcard .price{font-family:"Unbounded";font-weight:800;font-size:1.7rem;margin:14px 0 4px}
+#playsend .fcard .pnote{color:var(--muted);font-size:.9rem;margin-bottom:18px}
+#playsend .fcard ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+#playsend .fcard li{display:flex;gap:10px;line-height:1.45;font-size:.97rem}
+#playsend .fcard li::before{content:"";flex:none;width:20px;height:20px;border-radius:50%;background:var(--green);border:2px solid var(--ink);margin-top:1px}
+
+/* reviews */
+#playsend .rev{display:grid;grid-template-columns:1fr;gap:18px;margin-top:36px}
+@media(min-width:820px){#playsend .rev{grid-template-columns:repeat(3,1fr)}}
+#playsend .rcard{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:22px;box-shadow:5px 5px 0 var(--ink)}
+#playsend .rcard .stars{color:var(--star);letter-spacing:1px;margin-bottom:10px}
+#playsend .rcard p{line-height:1.5;margin-bottom:14px}
+#playsend .rev-cta{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;background:#fff;border:2px dashed var(--ink);border-radius:18px;padding:20px 24px}
+#playsend .rev-cta>span{font-weight:600;max-width:46ch;line-height:1.5}
+#playsend .rev-cta-act{display:flex;align-items:center;gap:18px;flex-shrink:0}
+#playsend .rev-all{font-weight:700;color:var(--violet);text-decoration:none;border-bottom:3px solid var(--sun);padding-bottom:1px;white-space:nowrap}
+#playsend .rev-all:hover{opacity:.7}
+#playsend .rcard .who{font-weight:600;font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:9px}
+#playsend .av{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font-family:"Unbounded";font-weight:700;font-size:13px;color:var(--ink)}
+#playsend .av.sky{background:var(--sky)}#playsend .av.coral{background:var(--coral)}#playsend .av.green{background:var(--green)}#playsend .av.violet{background:var(--violet);color:#fff}
+#playsend .rev-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px}
+#playsend .rev-rating{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--ink);border-radius:100px;padding:9px 16px;box-shadow:3px 3px 0 var(--ink);font-weight:600;font-size:.92rem;white-space:nowrap}
+#playsend .rev-rating .stars{color:var(--star);letter-spacing:1px}
+#playsend .rev-rating b{font-family:"Unbounded";font-weight:800;font-size:1.05rem}
+
+/* faq */
+#playsend .faq-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:44px;align-items:start}
+#playsend .faq-head{position:sticky;top:88px}
+#playsend .faq-aside{margin-top:18px;font-size:.95rem;color:var(--muted);line-height:1.55;max-width:30ch}
+#playsend .faq-list{margin-top:0;max-width:none}
+@media(max-width:860px){#playsend .faq-grid{grid-template-columns:1fr;gap:22px}#playsend .faq-head{position:static}}
+#playsend details{border:2px solid var(--ink);border-radius:14px;background:#fff;padding:18px 22px;margin-bottom:12px;box-shadow:3px 3px 0 var(--ink)}
+#playsend summary{display:flex;justify-content:space-between;gap:16px;cursor:pointer;font-family:"Unbounded";font-weight:700;font-size:1.04rem;list-style:none}
+#playsend summary::-webkit-details-marker{display:none}
+#playsend summary .pl{color:var(--violet);transition:transform .2s}
+#playsend details[open] summary .pl{transform:rotate(45deg)}
+#playsend details p{padding-top:12px;color:#544f46;line-height:1.6}
+
+/* final cta */
+#playsend .final{text-align:center;background:var(--violet);color:#fff;border-radius:0}
+#playsend .final h2{color:#fff;margin-bottom:16px}
+#playsend .final p{color:#EDE8FF;max-width:48ch;margin:0 auto 22px;line-height:1.6}
+#playsend .signup-steps{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:580px;margin:0 auto 24px}
+#playsend .signup-steps div{flex:1;min-width:155px;display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);border-radius:14px;padding:10px 12px;text-align:left}
+#playsend .signup-steps b{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--sun);color:var(--ink);font-family:"Unbounded";font-weight:700;font-size:.85rem;display:grid;place-items:center}
+#playsend .signup-steps span{font-size:.82rem;font-weight:600;color:#fff;line-height:1.3}
+#playsend .final ::selection{background:var(--sun);color:var(--ink)}
+#playsend .final .btn{background:var(--sun);color:var(--ink);border-color:#1a1a1a;box-shadow:4px 4px 0 #14111c}
+#playsend .signup-form{max-width:460px;margin:6px auto 0;display:flex;flex-direction:column;gap:12px;text-align:left}
+#playsend .sf-row{display:flex;gap:12px;flex-wrap:wrap}
+#playsend .sf-row input{flex:1;min-width:150px}
+#playsend .signup-form input,#playsend .signup-form select{width:100%;padding:14px 16px;border:2px solid #1a1a1a;border-radius:14px;background:#fff;color:var(--ink);font-family:inherit;font-size:1rem;box-shadow:3px 3px 0 #14111c;transition:box-shadow .15s}
+#playsend .signup-form input::placeholder{color:#8a8780}
+#playsend .signup-form input:focus,#playsend .signup-form select:focus{outline:none;box-shadow:3px 3px 0 var(--sun)}
+#playsend .signup-form.sf-err input:invalid{box-shadow:3px 3px 0 var(--coral)}
+#playsend .signup-form .btn{width:100%;justify-content:center;margin-top:2px}
+#playsend .sf-error{color:var(--ink);background:var(--coral);border:2px solid #1a1a1a;border-radius:12px;padding:9px 13px;font-size:.85rem;font-weight:700;text-align:center;margin:0}
+#playsend .sf-note{color:#EDE8FF!important;font-size:.84rem;text-align:center;margin:4px auto 0!important;max-width:none!important}
+#playsend .sf-ok{font-family:"Unbounded";font-weight:700;font-size:1.25rem;color:#fff;line-height:1.45;max-width:460px;margin:10px auto 0;padding:22px;border:2px solid rgba(255,255,255,.35);border-radius:18px;background:rgba(255,255,255,.1)}
+#playsend .final-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+#playsend .final-trust span{font-weight:600;font-size:13px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);border-radius:100px;padding:7px 14px;color:#fff}
+
+/* footer */
+#playsend footer{background:var(--ink);color:#EDE8E0;padding:44px 0}
+#playsend footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center}
+#playsend footer .fb{display:flex;align-items:center;gap:10px}
+#playsend footer .fb .name{font-family:"Unbounded";font-weight:800;font-size:18px}
+#playsend footer .fb .tag{font-size:11px;color:#A39D92;border-left:1px solid #4a463f;padding-left:9px;line-height:1.2}
+#playsend footer small{color:#A39D92;font-size:12.5px}
+
+/* scroll guide Joy */
+#joyGuide{position:fixed;left:24px;bottom:18px;z-index:60;width:134px;opacity:0;transform-origin:bottom center;pointer-events:none}
+#joyGuide.right{left:auto;right:24px}
+#joyGuide img{width:100%;filter:drop-shadow(6px 10px 10px rgba(32,32,30,.22));animation:bob 3.4s ease-in-out infinite;transform-origin:bottom center}
+#joyGuide img.talking{animation:talk .16s ease-in-out infinite}
+@keyframes talk{0%,100%{transform:scaleY(1) translateY(0)}50%{transform:scaleY(.93) translateY(2px)}}
+#joyGuide .gb{position:absolute;left:80%;bottom:58%;width:182px;background:#fff;border:2px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);padding:9px 13px;font-weight:600;font-size:13px;line-height:1.3;color:var(--ink)}
+#joyGuide .gb::after{content:"";position:absolute;left:-9px;bottom:14px;width:14px;height:14px;background:#fff;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg)}
+#joyGuide.right .gb{left:auto;right:80%}
+#joyGuide.right .gb::after{left:auto;right:-9px;border-left:0;border-bottom:0;border-right:2px solid var(--ink);border-top:2px solid var(--ink)}
+@media(max-width:760px){
+  #joyGuide{width:116px;left:12px;bottom:84px}
+  #joyGuide.right{left:auto;right:12px}
+  #joyGuide .gb{display:block;left:64%;bottom:56%;width:205px;font-size:13.5px;padding:10px 13px;line-height:1.32}
+  #joyGuide.right .gb{left:auto;right:64%}
+}
+
+@media (prefers-reduced-motion: reduce){#playsend *,#joyGuide img{animation:none!important}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","name":"PlaySEND","description":"Игровая школа английского для детей — проект Антишколы","brand":"PlaySEND","parentOrganization":{"@type":"Organization","name":"Антишкола","url":"https://antishkola.com"}},
+{"@type":"Course","name":"Английский для детей в играх","description":"Преподаватель-носитель из США и Великобритании играет с ребёнком в Minecraft, Roblox и Brawl Stars — и английский включается сам. Для детей 4–12 лет, в том числе с СДВГ и РАС.","provider":{"@type":"Organization","name":"PlaySEND"},"audience":{"@type":"EducationalAudience","educationalRole":"student"},"inLanguage":"ru","teaches":"Разговорный английский язык"},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"А он не просто проиграет весь урок?","acceptedAnswer":{"@type":"Answer","text":"Нет. Игру ведёт преподаватель: это инструмент, а не развлечение. Всё занятие — целевой язык в действии."}},
+{"@type":"Question","name":"Это безопасно в Roblox и Minecraft?","acceptedAnswer":{"@type":"Answer","text":"Да. На онбординге помогаем настроить безопасные аккаунты и родительский контроль."}},
+{"@type":"Question","name":"Подходит при СДВГ или РАС?","acceptedAnswer":{"@type":"Answer","text":"Да, это одна из наших сильных сторон. Преподаватели умеют работать с особенностями, без давления и оценок."}},
+{"@type":"Question","name":"А если ребёнок уже ненавидит английский?","acceptedAnswer":{"@type":"Answer","text":"Начинаем не с урока, а с контакта и интереса. Возвращаем любовь к языку через любимую игру."}},
+{"@type":"Question","name":"С какого возраста можно начинать?","acceptedAnswer":{"@type":"Answer","text":"С 4 лет. Для малышей — короткие игровые занятия; чем младше ребёнок, тем естественнее заходит язык."}},
+{"@type":"Question","name":"Что нужно для урока?","acceptedAnswer":{"@type":"Answer","text":"Только устройство (планшет, ноутбук или ПК), наушники и игра, в которую ребёнок уже играет. Ничего докупать не нужно."}},
+{"@type":"Question","name":"Когда будут первые результаты?","acceptedAnswer":{"@type":"Answer","text":"Первые слова и фразы — обычно к 3–4 уроку. Свободнее ребёнок говорит через пару месяцев. У каждого свой темп."}}
+]}
+]}
+</script>
+</head>
+<body>
+<div id="playsend">
+
+  <header data-header>
+    <div class="wrap">
+      <a class="brand" href="#"><span class="name disp">PlaySEND<span class="bdot"></span></span><span class="tag">Проект<br>Антишколы</span></a>
+      <nav><a href="#how">Как это работает</a><a href="#formats">Форматы</a><a href="#reviews">Отзывы</a><a href="#faq">FAQ</a></nav>
+      <a class="btn btn-violet" href="#signup" data-magnetic data-strength=".2">Записаться бесплатно</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" data-joy="point" data-say="Носитель играет с тобой в твоей игре">
+    <i class="cube c1" data-parallax data-parallax-speed="22"></i>
+    <i class="cube c2" data-parallax data-parallax-speed="-16"></i>
+    <i class="cube c3" data-parallax data-parallax-speed="18"></i>
+    <div class="wrap">
+      <div data-reveal>
+        <h1 data-split="hero"><span class="h1-kick"><span class="edot"></span>Английский для детей 4–12 лет</span>Он заговорит по-английски. Потому что <span class="mk">захочет</span> — а не потому что заставили.</h1>
+        <p class="sub">Носитель языка из США или Великобритании играет с ребёнком прямо в его игре — и английский включается сам. Первые слова — уже со второго занятия.</p>
+        <div class="cta-row">
+          <a class="btn btn-violet" href="#signup" data-magnetic data-strength=".25">Записаться на бесплатный урок</a>
+          <a class="link-how" href="#how">Как проходит урок →</a>
+        </div>
+        <div class="trust"><span class="pill sky">Носители US / UK</span><span class="pill green">4–12 лет</span><span class="pill sun">Первый урок бесплатно</span></div>
+      </div>
+      <div class="collage">
+        <div class="card photo"><span class="tape"></span><img src="assets/img/lesson-kid.webp" alt="Реальный урок: ребёнок занимается с преподавателем-носителем"><span class="real-tag">реальный урок</span></div>
+        <div class="card game"><img src="assets/img/game-screen.webp" alt="Урок проходит прямо внутри Minecraft"></div>
+        <img class="joy-char" src="assets/img/joy-point.webp" alt="Маскот Джой показывает">
+        <div class="joy-bubble">Учитель играет с тобой прямо в <b>твоей игре</b></div>
+        <div class="sticker s-rate"><span class="stars">★★★★★</span> любят дети</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="games"><div class="wrap"><span class="lbl">Учимся внутри</span><span class="pill">Minecraft</span><span class="pill">Roblox</span><span class="pill">Brawl Stars</span><span class="pill">и других миров</span></div></div>
+
+  <!-- TRUST BAR -->
+  <div class="trustbar"><div class="wrap tb-inner">
+    <span class="tb-lead">Проект <b>Антишколы</b> · с 2006&nbsp;года</span>
+    <div class="tb-stats">
+      <div data-reveal><b>30&nbsp;000+</b><span>учеников</span></div>
+      <div data-reveal data-delay=".05"><b>350+</b><span>преподавателей-носителей</span></div>
+      <div data-reveal data-delay=".1"><b>25</b><span>стран</span></div>
+      <div data-reveal data-delay=".15"><b>20 лет</b><span>опыта</span></div>
+    </div>
+  </div></div>
+
+  <!-- HOW -->
+  <section id="how" class="flow" data-joy="point" data-say="Три шага — и первая речь">
+    <div class="wrap">
+      <span class="kick" data-reveal>Как это работает</span>
+      <h2 data-reveal>Как ребёнок начинает говорить по-английски — за три шага</h2>
+      <p class="lead" data-reveal style="margin-top:14px">Без зубрёжки и принуждения. Преподаватель идёт за интересом ребёнка — и язык включается прямо в игре.</p>
+      <div class="how-main">
+      <figure class="lesson-vid" data-reveal>
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/img/lesson-poster.webp">
+          <source src="assets/video/lesson.mp4" type="video/mp4">
+          <source src="assets/video/lesson.webm" type="video/webm">
+        </video>
+        <span class="real-tag">реальный урок</span>
+        <button class="vid-sound" type="button" aria-label="Включить звук урока"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="vs-w" d="M15.5 8.5a5 5 0 0 1 0 7"/></svg><span class="vs-txt">Со звуком</span></button>
+        <figcaption>Так и проходит занятие: преподаватель-носитель и ученик вместе в Roblox.</figcaption>
+      </figure>
+      <div class="steps">
+        <div class="step s1" data-reveal><div class="n">1</div><h3>Бесплатный первый урок</h3><p>Знакомим преподавателя с миром ребёнка: любимая игра, персонажи, интересы. Никаких оценок и давления.</p></div>
+        <div class="step s2" data-reveal data-delay=".1"><div class="n">2</div><h3>Носитель играет рядом</h3><p>Чтобы пройти уровень и победить, ребёнку нужно понять преподавателя и ответить ему — по-английски. Язык становится способом выиграть, а не школьным предметом.</p></div>
+        <div class="step s3" data-reveal data-delay=".2"><div class="n">3</div><h3>Вы видите прогресс</h3><p>Ребёнок сам просит следующий урок. А вы получаете отчёт: что он уже понимает и говорит.</p></div>
+      </div>
+      </div>
+      <div class="timeline" data-reveal>
+        <h3 class="tl-head">Как включается речь <span class="tl-note">— у каждого свой темп, но обычно так</span></h3>
+        <div class="tl-track">
+          <div class="tl-fill"></div>
+          <div class="tl-node"><span class="tl-dot">1</span><b>Урок 1</b><i>слушает и осваивается</i></div>
+          <div class="tl-node"><span class="tl-dot">2</span><b>Урок 2</b><i>первые слова и глаголы</i></div>
+          <div class="tl-node"><span class="tl-dot">3</span><b>Урок 3–4</b><i>короткие фразы</i></div>
+          <span class="tl-goal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.4l2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.3 6.2 20.3l1.1-6.45-4.7-4.6 6.5-.95z"/></svg></span>
+          <span class="tl-goal-cap">говорит!</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFRAME -->
+  <section class="reframe" data-joy="point" data-joy-side="left" data-say="Экран — не враг. Это урок.">
+    <div class="wrap">
+      <div data-reveal>
+        <span class="kick">Перестаньте воевать за экран</span>
+        <h2>То, из-за чего вы ругались, станет его сильной стороной</h2>
+        <p class="lead">Вы устали запрещать и контролировать время в Roblox. Мы берём те же 60 минут в игре — и превращаем их в урок, которого ребёнок ждёт сам.</p>
+        <div class="switch">
+          <span class="was">Раньше — запреты, скандалы, «выключи игру»</span>
+          <span class="now">Теперь — урок, на который он бежит сам</span>
+        </div>
+      </div>
+      <div class="stat-col">
+        <div class="stat" data-reveal data-delay=".1"><div class="big">2–4</div><div class="cap">занятия — и ребёнок перестаёт бояться говорить. У каждого свой темп.</div></div>
+        <div class="stat" data-reveal data-delay=".2"><div class="big">0</div><div class="cap">учебников и зубрёжки. Только живая игра и речь — как у носителя дома.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEURO -->
+  <section class="flow soft" data-joy="wave" data-joy-side="right" data-say="Тут поймут любого ребёнка">
+    <div class="wrap">
+      <span class="kick" data-reveal>Подходит каждому</span>
+      <h2 data-reveal>Английский для детей с СДВГ и тревожностью — работает там, где не сработало ничего</h2>
+      <p class="lead" data-reveal style="margin-top:14px">Тревожным, стеснительным, тем, кто учится иначе или уже устал от английского. Формат подстраивается под ребёнка, а не наоборот.</p>
+      <div class="grid2">
+        <div class="card-b" data-reveal><h3>Если ребёнок возненавидел английский</h3><p>Сначала контакт, а не урок. Преподаватель идёт за интересом ребёнка и возвращает любовь к языку — без принуждения.</p></div>
+        <div class="card-b" data-reveal data-delay=".1"><h3>Если ребёнок учится иначе</h3><p>Есть опыт с СДВГ, РАС, дислексией, тревожностью. Безопасная среда, без давления, оценок и стыда — формат под ребёнка.</p></div>
+      </div>
+      <div class="callout" data-reveal><b>«Обычные курсы дочь не выдерживала и 20 минут. Через 4 месяца — простые диалоги без напоминаний»</b> — Елена, мама Софии (СДВГ).</div>
+      <div class="tags"><span class="pill sky">СДВГ / ADHD</span><span class="pill green">РАС / аутизм</span><span class="pill coral">дислексия</span><span class="pill sun">тревожность</span><span class="pill">школьный негатив</span></div>
+    </div>
+  </section>
+
+  <!-- TEACHERS -->
+  <section id="teachers" class="flow" data-joy="wave" data-joy-side="left" data-say="Это твои будущие учителя">
+    <div class="wrap">
+      <span class="kick" data-reveal>Преподаватели</span>
+      <h2 data-reveal>Преподаватели-носители из США и Великобритании</h2>
+      <p class="lead" data-reveal style="margin-top:14px">Дипломированные педагоги с сертификатами CELTA и TEFL и опытом работы с детьми. Урок идёт прямо в игре ребёнка — а не по учебнику.</p>
+      <div class="teachers">
+        <figure class="tch" data-reveal><img src="assets/img/teachers2/nicole.webp" alt="Преподаватель Николь" loading="lazy" decoding="async"><figcaption><b>Николь</b><span>США · английский детям</span></figcaption></figure>
+        <figure class="tch" data-reveal data-delay=".05"><img src="assets/img/teachers2/sarah.webp" alt="Преподаватель Сара" loading="lazy" decoding="async"><figcaption><b>Сара</b><span>носитель · дети и взрослые</span></figcaption></figure>
+        <figure class="tch" data-reveal data-delay=".1"><img src="assets/img/teachers2/christa.webp" alt="Преподаватель Криста" loading="lazy" decoding="async"><figcaption><b>Криста</b><span>США · CELTA, IELTS</span></figcaption></figure>
+        <figure class="tch" data-reveal data-delay=".15"><img src="assets/img/teachers2/sandra.webp" alt="Преподаватель Сандра" loading="lazy" decoding="async"><figcaption><b>Сандра</b><span>Великобритания · CELTA</span></figcaption></figure>
+        <figure class="tch" data-reveal data-delay=".2"><img src="assets/img/teachers2/toby.webp" alt="Преподаватель Тоби" loading="lazy" decoding="async"><figcaption><b>Тоби</b><span>Великобритания · британский акцент</span></figcaption></figure>
+        <figure class="tch" data-reveal data-delay=".25"><img src="assets/img/teachers2/matthew.webp" alt="Преподаватель Мэттью" loading="lazy" decoding="async"><figcaption><b>Мэттью</b><span>носитель · CELTA, 15+ лет</span></figcaption></figure>
+      </div>
+      <a class="tlink" data-reveal href="https://antishkola.com/teachers/" target="_blank" rel="noopener">Познакомиться со всеми 350+ преподавателями&nbsp;→</a>
+    </div>
+  </section>
+
+  <!-- FORMATS -->
+  <section id="formats" class="formats" data-joy="point" data-joy-side="left" data-say="Первый урок — бесплатно">
+    <div class="wrap">
+      <span class="kick" data-reveal>Форматы</span>
+      <h2 data-reveal>Форматы английского: индивидуально или в маленькой команде</h2>
+      <div class="grid2" style="margin-top:38px">
+        <div class="fcard" data-reveal>
+          <span class="fbadge sky">Максимум внимания</span>
+          <h3 class="ft">Индивидуально 1-на-1 с носителем</h3>
+          <p class="lead" style="font-size:.97rem">Личный преподаватель, темп под ребёнка, любой запрос — от нуля до экзаменов.</p>
+          <div class="price">от 10 100 ₽<span style="font-size:1rem;font-weight:600">/мес</span></div>
+          <div class="pnote">носители US/UK · под характер ребёнка</div>
+          <ul><li>Личный преподаватель-геймер</li><li>Гибкое расписание</li><li>Отчёт о прогрессе родителю</li></ul>
+          <a class="btn btn-violet" href="#signup" data-magnetic data-strength=".2">Бесплатный первый урок</a>
+        </div>
+        <div class="fcard feat" data-reveal data-delay=".1">
+          <span class="fbadge sun">Выгоднее</span>
+          <h3 class="ft">Микрогруппа до 4 детей</h3>
+          <p class="lead" style="font-size:.97rem">Клуб друзей из Японии, Сингапура, Израиля. Живое общение в команде — и доступнее, чем 1-на-1.</p>
+          <div class="price">от 5 500 ₽<span style="font-size:1rem;font-weight:600">/мес</span></div>
+          <div class="pnote">до 4 детей · 30–45 минут · общая игра</div>
+          <ul><li>Игра и общение в команде</li><li>Международные группы</li><li>Социализация на языке</li></ul>
+          <a class="btn btn-violet" href="#signup" data-magnetic data-strength=".2">Бесплатный первый урок</a>
+        </div>
+      </div>
+      <p class="price-note" data-reveal>Цена зависит от количества уроков в неделю. Точную программу под ребёнка и финальную стоимость назовём на бесплатном первом уроке — без обязательств.</p>
+      <div class="guarantee" data-reveal><b>Гарантия:</b> первый урок — бесплатно. Не подошёл преподаватель — бесплатно подберём другого, пока ребёнку не станет интересно.</div>
+    </div>
+  </section>
+
+  <!-- SAFETY -->
+  <div class="safety"><div class="wrap">
+    <h2 data-reveal>Безопасный английский для детей — и спокойствие для родителей</h2>
+    <div class="safe-grid">
+      <div data-reveal><b>Проверенные преподаватели</b><span>Каждый проходит отбор и интервью — конкурс 1:40 на место.</span></div>
+      <div data-reveal data-delay=".05"><b>Урок виден родителю</b><span>Можно смотреть занятие и пересматривать запись — вы всегда в курсе.</span></div>
+      <div data-reveal data-delay=".1"><b>Безопасный аккаунт</b><span>Поможем настроить приватность и родительский контроль в Roblox и Minecraft.</span></div>
+    </div>
+  </div></div>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="flow" data-joy="celebrate" data-joy-side="right" data-say="Они уже заговорили!">
+    <div class="wrap">
+      <div class="rev-top" data-reveal>
+        <div><span class="kick">Отзывы</span><h2>Родители о разговорном английском: что изменилось за пару месяцев</h2></div>
+        <div class="rev-rating"><span class="stars">★★★★★</span><span>реальные истории родителей</span></div>
+      </div>
+      <div class="rev">
+        <div class="rcard" data-reveal><div class="stars">★★★★★</div><p>Сын впервые сказал «I won!» — я расплакалась. Через два месяца — целыми фразами в Roblox с американским другом.</p><div class="who"><span class="av sky">О</span> Ольга, мама Миши, 6 лет</div></div>
+        <div class="rcard" data-reveal data-delay=".1"><div class="stars">★★★★★</div><p>У дочери СДВГ — обычные курсы не выдерживала и 20 минут. Sarah запомнила имена её динозавров и встроила их в игру. Через 4 месяца — простые диалоги без напоминаний.</p><div class="who"><span class="av green">Е</span> Елена, мама Софии, 7 лет</div></div>
+        <div class="rcard" data-reveal data-delay=".2"><div class="stars">★★★★★</div><p>Через 3 месяца сын в Барселоне сам заказал мороженое и поболтал с продавщицей. Мы молча смотрели на него — и не верили.</p><div class="who"><span class="av coral">А</span> Анна, мама Артёма, 8 лет</div></div>
+      </div>
+      <div class="rev-cta" data-reveal>
+        <span>Занимаетесь у нас? Расскажите, как изменился ребёнок — это помогает другим родителям выбрать.</span>
+        <span class="rev-cta-act"><a class="rev-all" href="otzyvy/">Все отзывы&nbsp;→</a><a class="btn" href="otzyvy/#leave" data-magnetic data-strength=".2">Оставить отзыв</a></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="formats" data-joy="point" data-say="Здесь отвечаем честно">
+    <div class="wrap faq-grid">
+      <div class="faq-head">
+        <span class="kick" data-reveal>Вопросы</span>
+        <h2 data-reveal>Коротко о главном</h2>
+        <p class="faq-aside" data-reveal>Остался вопрос? Задайте его на бесплатном первом уроке — покажем, как всё устроено изнутри.</p>
+      </div>
+      <div class="faq-list" data-reveal>
+        <details><summary>А он не просто проиграет весь урок? <span class="pl">+</span></summary><p>Нет. Игру ведёт преподаватель: это инструмент, а не развлечение. Всё занятие — целевой язык в действии.</p></details>
+        <details><summary>Это безопасно в Roblox и Minecraft? <span class="pl">+</span></summary><p>Да. На онбординге помогаем настроить безопасные аккаунты и родительский контроль.</p></details>
+        <details><summary>Подходит при СДВГ или РАС? <span class="pl">+</span></summary><p>Да, это одна из наших сильных сторон. Преподаватели умеют работать с особенностями, без давления и оценок.</p></details>
+        <details><summary>А если ребёнок уже ненавидит английский? <span class="pl">+</span></summary><p>Начинаем не с урока, а с контакта и интереса. Возвращаем любовь к языку через любимую игру.</p></details>
+        <details><summary>С какого возраста можно начинать? <span class="pl">+</span></summary><p>С 4 лет. Для малышей — короткие игровые занятия; чем младше ребёнок, тем естественнее заходит язык.</p></details>
+        <details><summary>Что нужно для урока? <span class="pl">+</span></summary><p>Только устройство (планшет, ноутбук или ПК), наушники и игра, в которую ребёнок уже играет. Ничего докупать не нужно.</p></details>
+        <details><summary>Когда будут первые результаты? <span class="pl">+</span></summary><p>Первые слова и фразы — обычно к 3–4 уроку. Свободнее ребёнок говорит через пару месяцев. У каждого свой темп.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section id="signup" class="final" data-joy="celebrate" data-say="Первый урок — бесплатно">
+    <div class="wrap" data-reveal>
+      <h2>Запишите ребёнка на бесплатный урок английского в игре</h2>
+      <p>Оставьте контакт — познакомим преподавателя с миром вашего ребёнка. Без давления, просто игра, в которой включается английский.</p>
+      <div class="signup-steps" data-reveal>
+        <div><b>1</b><span>Заявка — одна минута</span></div>
+        <div><b>2</b><span>Знакомство и диагностика — 15 минут, бесплатно</span></div>
+        <div><b>3</b><span>Пробный урок в любимой игре — без обязательств</span></div>
+      </div>
+      <form class="signup-form" id="signupForm" novalidate>
+        <div class="sf-row">
+          <input type="text" name="pname" placeholder="Ваше имя" aria-label="Ваше имя" required autocomplete="name">
+          <input type="tel" name="pphone" placeholder="Телефон или WhatsApp" aria-label="Телефон или WhatsApp" required autocomplete="tel" inputmode="tel">
+        </div>
+        <select name="page" aria-label="Возраст ребёнка">
+          <option value="">Возраст ребёнка (необязательно)</option>
+          <option>4–6 лет</option><option>7–9 лет</option><option>10–12 лет</option>
+        </select>
+        <button type="submit" class="btn" data-magnetic data-strength=".2">Записаться на бесплатный урок</button>
+        <p class="sf-error" id="sfErr" role="alert" hidden>Впишите имя и телефон — и мы перезвоним, чтобы записать на урок.</p>
+        <p class="sf-note">Перезвоним в течение дня. Никакого спама — только запись на пробный урок.</p>
+      </form>
+      <div class="final-trust"><span>Носители US / UK</span><span>4–12 лет</span><span>Заменим преподавателя бесплатно</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="fb"><span class="name disp">PlaySEND<span class="bdot"></span></span><span class="tag">Проект Антишколы</span></div>
+      <small>© 2026 PlaySEND · Игровая школа английского для детей</small>
+    </div>
+  </footer>
+
+  <div class="mcta"><a class="btn btn-violet" href="#signup">Записаться на бесплатный урок</a></div>
+
+</div>
+
+<!-- Joy scroll-guide -->
+<div id="joyGuide"><div class="gb">Погнали!</div><img src="assets/img/joy-point.webp" alt="Джой-гид"></div>
+
+<script>if(location.hash==='#shot'){document.querySelectorAll('[data-reveal],[data-split]').forEach(function(e){e.removeAttribute('data-reveal');e.removeAttribute('data-split');});}</script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="assets/motion/motion.js"></script>
+<script>
+/* Hero Joy: flies OUT of the logo into the hero, then the logo becomes a clean wordmark */
+(function(){
+  var j=document.querySelector('#playsend .joy-char'), b=document.querySelector('#playsend .joy-bubble');
+  var brand=document.querySelector('#playsend .brand');
+  if(!j)return;
+  var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function settle(){ gsap.set(j,{opacity:1,y:0}); if(b)gsap.to(b,{opacity:1,scale:1,duration:.4,ease:'back.out(2)'}); if(window.gsap)gsap.to(j,{y:-9,repeat:-1,yoyo:true,duration:1.9,ease:'sine.inOut'}); }
+  if(rm||!window.gsap){ j.style.opacity=1; if(b)b.style.opacity=1; return; }
+  if(matchMedia('(max-width:760px)').matches){ return; }
+  gsap.set(j,{opacity:0}); if(b)gsap.set(b,{opacity:0,scale:.5,transformOrigin:'left bottom'});
+  function fly(){
+    try{
+      var br=brand.getBoundingClientRect(), tr=j.getBoundingClientRect();
+      if(!brand||!tr.width){ settle(); return; }
+      var sz=34, sx=br.left-2, sy=br.top+(br.height-sz)/2;
+      var f=document.createElement('img'); f.src='assets/img/joy-wave.webp'; f.alt='';
+      f.style.cssText='position:fixed;z-index:999;pointer-events:none;object-fit:contain;left:'+sx+'px;top:'+sy+'px;width:'+sz+'px;height:'+sz+'px;filter:drop-shadow(5px 9px 9px rgba(32,32,30,.22))';
+      document.body.appendChild(f);
+      gsap.timeline({delay:.5})
+        .fromTo(f,{scale:0,rotation:-20},{scale:1,rotation:0,duration:.35,ease:'back.out(2)'})
+        .to(f,{left:tr.left,top:tr.top-tr.height*0.2,width:tr.width,height:tr.height,duration:.85,ease:'power2.inOut'})
+        .to(f,{top:tr.top,duration:.42,ease:'bounce.out'})
+        .add(function(){ gsap.set(j,{opacity:1}); f.remove();
+          if(b)gsap.fromTo(b,{opacity:0,scale:.5},{opacity:1,scale:1,duration:.4,ease:'back.out(2.2)'});
+          gsap.to(j,{y:-9,repeat:-1,yoyo:true,duration:1.9,ease:'sine.inOut'}); });
+    }catch(e){ settle(); }
+  }
+  if(document.readyState==='complete') setTimeout(fly,250); else window.addEventListener('load',function(){setTimeout(fly,250);});
+})();
+
+/* Signup form: validate + confirm. TODO: POST lead to CRM (Bitrix24) / Formspree endpoint. */
+(function(){
+  var f=document.getElementById('signupForm'); if(!f)return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=(f.querySelector('[name=pname]').value||'').trim();
+    var p=(f.querySelector('[name=pphone]').value||'').trim();
+    var err=document.getElementById('sfErr');
+    if(!n||p.replace(/\D/g,'').length<7){ f.classList.add('sf-err'); if(err)err.hidden=false; (n?f.querySelector('[name=pphone]'):f.querySelector('[name=pname]')).focus(); return; }
+    if(err)err.hidden=true;
+    // TODO: send {name, phone, age} to the real lead endpoint here.
+    var ok=document.createElement('div'); ok.className='sf-ok';
+    ok.textContent='Спасибо, '+n.replace(/[<>]/g,'')+'! Перезвоним сегодня — познакомим преподавателя с игрой вашего ребёнка.';
+    f.replaceWith(ok);
+  });
+})();
+
+/* Mobile sticky CTA: hide while the hero (own CTA) or the signup form is on screen */
+(function(){
+  var bar=document.querySelector('#playsend .mcta');
+  var hero=document.querySelector('#playsend .hero'), sign=document.getElementById('signup');
+  if(!bar||!('IntersectionObserver' in window))return;
+  var inH=false, inS=false, upd=function(){bar.classList.toggle('hide',inH||inS);};
+  if(hero) new IntersectionObserver(function(es){inH=es[0].isIntersecting;upd();},{threshold:.2}).observe(hero);
+  if(sign) new IntersectionObserver(function(es){inS=es[0].isIntersecting;upd();},{threshold:.12}).observe(sign);
+})();
+
+/* Lesson video: sound toggle + play only when visible (perf) + reduced-motion */
+(function(){
+  var fig=document.querySelector('#playsend .lesson-vid'); if(!fig)return;
+  var v=fig.querySelector('video'), btn=fig.querySelector('.vid-sound'), txt=btn&&btn.querySelector('.vs-txt');
+  var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!v)return;
+  if(rm){ try{v.removeAttribute('autoplay');v.pause();}catch(e){} }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      if(!e.isIntersecting){ v.pause(); } else if(!rm){ v.play().catch(function(){}); }
+    });},{threshold:.25}).observe(v);
+  }
+  if(btn) btn.addEventListener('click',function(){
+    v.muted=!v.muted;
+    if(!v.muted){ v.currentTime=0; v.play().catch(function(){}); btn.classList.add('is-on'); if(txt)txt.textContent='Звук вкл'; }
+    else { btn.classList.remove('is-on'); if(txt)txt.textContent='Со звуком'; }
+    btn.setAttribute('aria-label', v.muted?'Включить звук урока':'Выключить звук урока');
+  });
+})();
+/* XP bar fill on scroll */
+(function(){var tl=document.querySelector('#playsend .timeline');if(!tl)return;var fill=tl.querySelector('.tl-fill');
+if('IntersectionObserver'in window){new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)tl.classList.add('is-in');})},{threshold:.4}).observe(tl);}
+if(window.gsap&&window.ScrollTrigger&&fill){gsap.fromTo(fill,{scaleX:0},{scaleX:1,ease:'none',scrollTrigger:{trigger:tl,start:'top 82%',end:'bottom 76%',scrub:.5}});}
+})();
+/* Hero collage mouse-parallax — tactile depth */
+(function(){
+  var col=document.querySelector('#playsend .collage');
+  if(!col||!window.gsap||matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var ph=col.querySelector('.card.photo'),gm=col.querySelector('.card.game');
+  if(!ph||!gm)return;
+  gsap.set(ph,{rotation:-3,transformOrigin:'center'});gsap.set(gm,{rotation:3,transformOrigin:'center'});
+  col.addEventListener('mousemove',function(e){var r=col.getBoundingClientRect();var dx=(e.clientX-r.left-r.width/2)/r.width,dy=(e.clientY-r.top-r.height/2)/r.height;
+    gsap.to(ph,{x:dx*-9,y:dy*-9,duration:.7,ease:'power2.out',overwrite:'auto'});
+    gsap.to(gm,{x:dx*-20,y:dy*-20,duration:.7,ease:'power2.out',overwrite:'auto'});});
+  col.addEventListener('mouseleave',function(){gsap.to([ph,gm],{x:0,y:0,duration:.8,ease:'power2.out'});});
+})();
+/* Joy scroll-guide: pops, jumps sides, changes pose + line per section */
+(function(){
+  var g=document.getElementById('joyGuide'),img=g.querySelector('img'),gb=g.querySelector('.gb');
+  var pose={point:'assets/img/joy-point.webp',wave:'assets/img/joy-wave.webp',celebrate:'assets/img/joy-celebrate.webp'};
+  var hero=document.querySelector('.hero');
+  var secs=[].slice.call(document.querySelectorAll('section[data-joy]')).filter(function(s){return !s.classList.contains('hero');});
+  var mob=matchMedia('(max-width:760px)').matches, rm=matchMedia('(prefers-reduced-motion:reduce)').matches, inHero=true, cur=null, tt=null, ht=null;
+  function type(el,text){
+    clearInterval(tt); el.textContent='';
+    if(rm){el.textContent=text;return;}
+    var i=0; img.classList.add('talking');
+    tt=setInterval(function(){ el.textContent=text.slice(0,++i);
+      if(i>=text.length){clearInterval(tt); img.classList.remove('talking');} }, 33);
+  }
+  function pop(p,s,side){
+    if(cur===s)return; cur=s;
+    var apply=function(){if(pose[p])img.src=pose[p];g.classList.toggle('right',side==='right');if(s)type(gb,s);};
+    if(window.gsap){gsap.timeline().to(g,{scale:.4,opacity:0,y:28,duration:.2,ease:'power2.in'}).add(apply).fromTo(g,{scale:.4,opacity:0,y:28},{scale:1,opacity:1,y:0,duration:.5,ease:'back.out(1.5)'});}
+    else{apply();g.style.opacity=1;}
+  }
+  function hide(){cur=null;clearInterval(tt);img.classList.remove('talking');if(window.gsap){gsap.to(g,{scale:.4,opacity:0,y:24,duration:.25,ease:'power2.in'});}else{g.style.opacity=0;}}
+  function sideFor(el){return el.getAttribute('data-joy-side')||((secs.indexOf(el)%2===0)?'left':'right');}
+  function popSec(el){pop(el.getAttribute('data-joy'),el.getAttribute('data-say'),sideFor(el));if(mob){clearTimeout(ht);ht=setTimeout(hide,5000);}}
+  if('IntersectionObserver'in window){
+    new IntersectionObserver(function(e){inHero=e[0].isIntersecting;
+      if(inHero){ if(mob){pop('wave','Привет! Я Джой — поехали играть','left');clearTimeout(ht);ht=setTimeout(hide,5000);} else hide(); }
+    },{threshold:.12}).observe(hero);
+    var active=new Set();
+    var io=new IntersectionObserver(function(es){
+      var entered=null;
+      es.forEach(function(x){ if(x.isIntersecting&&!inHero){ if(!active.has(x.target))entered=x.target; active.add(x.target); } else active.delete(x.target); });
+      if(entered) popSec(entered);
+      else if(mob&&active.size===0&&!inHero){ clearTimeout(ht); hide(); }
+    },{threshold:.55});
+    secs.forEach(function(s){io.observe(s);});
+  }
+})();
+</script>
+<script>/* portfolio embed: keep the visitor on the page, in-page anchors still work */
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(h.charAt(0)==='#'||h.indexOf('javascript:')===0)return;e.preventDefault();},true);
+document.addEventListener('submit',function(e){e.preventDefault();},true);</script>
+</body>
+</html>

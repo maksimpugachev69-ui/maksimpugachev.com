@@ -1,0 +1,872 @@
+/* ============================================
+   FERMA × VALTA v2 — Premium e-com landing
+   Ferma-стилистика (cream + green + orange) + cinematic accents
+   ============================================ */
+
+:root {
+  /* ===== FERMA BASE ===== */
+  --ferma-white:        #FFFFFF;
+  --ferma-cream:        #FAF8F5;  /* основной светлый фон */
+  --ferma-cream-2:      #F2F0ED;  /* secondary background */
+  --ferma-cream-3:      #E7E4E0;  /* card on cream */
+  --ferma-outline:      #CECDCA;
+  --ferma-outline-soft: #E7E7E7;
+
+  /* Ferma brand */
+  --ferma-green:        #7BA148;
+  --ferma-green-hover:  #8EB559;
+  --ferma-green-dark:   #5E7F31;
+  --ferma-orange:       #FF8B1C;
+  --ferma-orange-dark:  #DF6D00;
+  --ferma-logo:         #1E2219;
+
+  /* ===== TEXT ===== */
+  --text-on-cream:        #251C1C;   /* warm black */
+  --text-on-cream-muted:  #7A7877;
+  --text-on-cream-brown:  #675555;
+
+  /* ===== CINEMATIC ACCENT (для hero, CTA, контекстных вставок) ===== */
+  --bg-deep:        #0F0E0C;
+  --bg-night:       #1A1815;
+  --bg-night-2:     #221F1B;
+  --bg-night-3:     #2C2823;
+  --burgundy:       #6E2434;
+  --gold-warm:      #C5A572;
+  --gold-warm-dim:  #8B7449;
+  --text-on-dark:        #F2F0ED;
+  --text-on-dark-muted:  rgba(242, 240, 237, 0.75);
+  --text-on-dark-faint:  rgba(242, 240, 237, 0.45);
+  --outline-on-dark:     rgba(242, 240, 237, 0.16);
+  --outline-on-dark-2:   rgba(242, 240, 237, 0.28);
+
+  /* States */
+  --danger:        #C3464A;
+  --positive:      var(--ferma-green);
+  --negative:      #D9534F;
+
+  /* Font */
+  --font: 'Montserrat', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --s-1: 8px;   --s-2: 16px;  --s-3: 24px;
+  --s-4: 32px;  --s-5: 48px;  --s-6: 64px;
+  --s-7: 96px;  --s-8: 128px; --s-9: 192px;
+
+  /* Radius */
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-pill: 999px;
+
+  /* Shadows */
+  --shadow-soft:  0 4px 25px rgba(189, 187, 187, 0.35);
+  --shadow-warm:  0 8px 32px rgba(189, 187, 187, 0.25);
+  --shadow-deep:  0 24px 80px rgba(0, 0, 0, 0.55);
+
+  /* Easing */
+  --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out:  cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-weight: 400;
+  background: var(--ferma-cream);
+  color: var(--text-on-cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img, video, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+::selection { background: var(--ferma-green); color: var(--ferma-white); }
+
+/* ===== TYPOGRAPHY ===== */
+.eyebrow {
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ferma-green-dark);
+  margin: 0 0 var(--s-3);
+}
+.eyebrow--dark { color: var(--gold-warm); }
+.eyebrow--orange { color: var(--ferma-orange-dark); }
+
+.display-mega {
+  font-size: clamp(80px, 14vw, 220px);
+  line-height: 0.9;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  margin: 0;
+  color: var(--ferma-logo);
+}
+.display-h1 {
+  font-size: clamp(40px, 6vw, 96px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 0 0 var(--s-4);
+  color: var(--ferma-logo);
+}
+.display-h2 {
+  font-size: clamp(28px, 3.6vw, 56px);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  margin: 0 0 var(--s-3);
+  color: var(--ferma-logo);
+}
+.display-h3 {
+  font-size: clamp(20px, 2.2vw, 32px);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  margin: 0 0 var(--s-2);
+  color: var(--ferma-logo);
+}
+.display-h4 {
+  font-size: clamp(17px, 1.5vw, 22px);
+  line-height: 1.3;
+  font-weight: 700;
+  margin: 0 0 var(--s-2);
+  color: var(--ferma-logo);
+}
+
+.lead {
+  font-size: clamp(16px, 1.3vw, 22px);
+  line-height: 1.55;
+  font-weight: 400;
+  max-width: 760px;
+  margin: 0 0 var(--s-4);
+  color: var(--text-on-cream-brown);
+}
+.body {
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.65;
+  font-weight: 400;
+  max-width: 720px;
+  margin: 0 0 var(--s-3);
+  color: var(--text-on-cream-brown);
+}
+.caption {
+  font-size: clamp(12px, 0.85vw, 13px);
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--text-on-cream-muted);
+  letter-spacing: 0.02em;
+}
+
+/* On dark sections */
+.on-dark .display-mega,
+.on-dark .display-h1,
+.on-dark .display-h2,
+.on-dark .display-h3,
+.on-dark .display-h4 { color: var(--text-on-dark); }
+.on-dark .lead { color: var(--text-on-dark-muted); }
+.on-dark .body { color: var(--text-on-dark-muted); }
+.on-dark .caption { color: var(--text-on-dark-faint); }
+.on-dark .eyebrow { color: var(--gold-warm); }
+
+.num-tab { font-variant-numeric: tabular-nums; }
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 80px);
+}
+.section {
+  position: relative;
+  overflow: hidden;
+}
+.section--cream  { background: var(--ferma-cream);  color: var(--text-on-cream); }
+.section--white  { background: var(--ferma-white);  color: var(--text-on-cream); }
+.section--cream-2{ background: var(--ferma-cream-2);color: var(--text-on-cream); }
+.section--dark   { background: var(--bg-deep);  color: var(--text-on-dark); }
+.section--night  { background: var(--bg-night); color: var(--text-on-dark); }
+
+.section-pad    { padding: clamp(40px, 5vh, 64px) 0; }
+.section-pad-lg { padding: clamp(56px, 7vh, 80px) 0; }
+
+/* ============ HORIZONTAL SLIDE-DECK (snap, no scrub) ============ */
+html, body {
+  height: 100vh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+.horizontal-deck {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.slides-track {
+  display: flex;
+  height: 100vh;
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+.slide {
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  padding-top: 80px; /* clearance below nav (~46px) + buffer */
+  padding-bottom: 88px; /* clearance above counter */
+  scrollbar-width: thin;
+  scrollbar-color: var(--ferma-outline) transparent;
+}
+.slide::-webkit-scrollbar { width: 6px; }
+.slide::-webkit-scrollbar-track { background: transparent; }
+.slide::-webkit-scrollbar-thumb { background: var(--ferma-outline); border-radius: 3px; }
+/* slides with fit-content centered */
+.slide:not(.slide-tall) > .container,
+.slide:not(.slide-tall) > .cta-content { margin-top: auto; margin-bottom: auto; }
+.slide.section--dark::-webkit-scrollbar-thumb { background: var(--outline-on-dark-2); }
+/* ===== TRANSITION MOTION-BLUR on slides-track during navigation ===== */
+.slides-track.is-moving { filter: blur(0.4px); }
+
+/* ===== Counter pop animation ===== */
+.slide-counter .num-flip {
+  display: inline-block;
+  min-width: 2ch;
+  text-align: center;
+}
+.slide-counter.flipping #slide-current {
+  animation: numFlip 0.55s var(--ease-out);
+}
+@keyframes numFlip {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  40%  { transform: translateY(-14px) scale(0.85); opacity: 0; }
+  41%  { transform: translateY(14px) scale(0.85); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ===== Slide-entry shine sweep (light pass) ===== */
+.slide-enter-shine::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+  z-index: 5;
+  pointer-events: none;
+  animation: shineSweep 1.2s ease-out forwards;
+}
+@keyframes shineSweep {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+/* ===== "more below" indicator (визуально намекает что слайд имеет вертикальный скролл) ===== */
+.slide.has-overflow::after {
+  content: '↓';
+  position: sticky;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ferma-orange-dark);
+  border-radius: 50%;
+  box-shadow: var(--shadow-soft);
+  font-size: 18px;
+  font-weight: 700;
+  animation: nudgeDown 2s ease-in-out infinite;
+  pointer-events: none;
+  align-self: center;
+  margin-top: -56px;
+  z-index: 10;
+}
+.slide.section--dark.has-overflow::after {
+  background: rgba(15, 14, 12, 0.85);
+  color: var(--gold-warm);
+}
+.slide.has-overflow.scrolled-bottom::after { opacity: 0; }
+@keyframes nudgeDown {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+.slide.slide-hero { padding-top: 0; padding-bottom: 0; }
+/* hide footer in horizontal mode — it's the deck endpoint info */
+body.horizontal-mode .footer { display: none; }
+
+/* Mobile fallback: vertical native scroll */
+@media (max-width: 900px), (pointer: coarse) {
+  html, body { height: auto; overflow: auto; }
+  .horizontal-deck { position: relative; height: auto; overflow: visible; }
+  .slides-track { flex-direction: column; width: 100%; height: auto; transform: none !important; }
+  .slide { flex: 0 0 auto; width: 100%; height: auto; min-height: 100vh; padding-top: 56px; padding-bottom: 0; }
+  body.horizontal-mode .footer { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html, body { height: auto; overflow: auto; }
+  .horizontal-deck { position: relative; height: auto; overflow: visible; }
+  .slides-track { flex-direction: column; width: 100%; height: auto; transform: none !important; }
+  .slide { flex: 0 0 auto; width: 100%; height: auto; min-height: 100vh; padding-top: 56px; padding-bottom: 0; }
+}
+
+/* ============ DECK UI: progress bar + counter + arrows ============ */
+.deck-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.06);
+  z-index: 200;
+  pointer-events: none;
+}
+.deck-progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--ferma-orange) 0%, var(--ferma-green) 100%);
+  transition: width .2s ease-out;
+}
+.slide-counter {
+  position: fixed;
+  bottom: clamp(16px, 3vh, 28px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-on-cream);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  padding: 8px 20px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--ferma-outline-soft);
+  box-shadow: var(--shadow-soft);
+  pointer-events: none;
+  transition: color .3s, background .3s, border-color .3s;
+}
+.slide-counter.is-dark {
+  background: rgba(15, 14, 12, 0.6);
+  border-color: var(--outline-on-dark);
+  color: var(--text-on-dark);
+}
+.deck-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--ferma-outline-soft);
+  border-radius: 50%;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ferma-logo);
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  user-select: none;
+  transition: all .25s var(--ease-out);
+}
+.deck-arrow:hover { background: var(--ferma-orange); color: var(--ferma-white); border-color: var(--ferma-orange); }
+.deck-arrow.is-dark { background: rgba(15, 14, 12, 0.6); border-color: var(--outline-on-dark); color: var(--text-on-dark); }
+.deck-arrow-left  { left: clamp(12px, 2vw, 28px); }
+.deck-arrow-right { right: clamp(12px, 2vw, 28px); }
+.deck-arrow.is-disabled { opacity: 0.3; pointer-events: none; }
+@media (max-width: 900px), (pointer: coarse) {
+  .deck-arrow, .slide-counter, .deck-progress { display: none; }
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px clamp(20px, 5vw, 64px);
+  backdrop-filter: blur(20px);
+  background: rgba(250, 248, 245, 0.85);
+  border-bottom: 1px solid var(--ferma-outline-soft);
+  color: var(--text-on-cream);
+  transition: background .4s var(--ease-out), border-color .4s var(--ease-out), color .4s var(--ease-out);
+}
+.nav.is-dark {
+  background: rgba(15, 14, 12, 0.65);
+  border-bottom-color: var(--outline-on-dark);
+  color: var(--text-on-dark);
+}
+.nav-brand {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-brand .x { opacity: 0.35; font-weight: 500; margin: 0 8px; }
+
+/* ============================================
+   INTRO OVERLAY — full-screen logo reveal → Flip morph to nav
+   Pattern: capture nav position (Flip.getState), show overlay with logo
+   centered & large, hold, then move logo to nav position via Flip.from()
+   ============================================ */
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(ellipse at center, #2C2823 0%, #0F0E0C 75%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+#intro-overlay::before {
+  /* warm spotlight behind logo */
+  content: '';
+  position: absolute;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(255, 200, 100, 0.18) 0%, transparent 60%);
+  filter: blur(40px);
+  z-index: 0;
+}
+#intro-logo {
+  position: relative;
+  z-index: 1;
+  height: 42vh;
+  max-width: 70vw;
+  width: auto;
+  filter:
+    drop-shadow(0 0 2px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 0 4px rgba(255, 255, 255, 0.8))
+    drop-shadow(0 0 24px rgba(255, 200, 100, 0.45))
+    drop-shadow(0 0 60px rgba(255, 200, 100, 0.25));
+}
+.intro-done #intro-overlay { display: none; }
+
+/* Subtle corner logo on dark retail slides — no glow halo, just soft shadow for readability */
+.retail-corner-logo {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+  user-select: none;
+}
+
+/* Logo white outline (stack of drop-shadows = pseudo text-stroke around opaque pixels).
+   Делает буквы и контур логотипа читаемыми на любом фоне, особенно тёмном. */
+.logo-ferma-img {
+  filter:
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 0 2px rgba(255, 255, 255, 0.85))
+    drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+}
+/* On dark sections — добавляем тёплое свечение поверх белой обводки */
+.section--dark .logo-ferma-img,
+.on-dark .logo-ferma-img,
+.nav.is-dark .logo-ferma-img {
+  filter:
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 0 3px rgba(255, 255, 255, 0.7))
+    drop-shadow(0 0 12px rgba(255, 200, 100, 0.35));
+}
+
+/* ============================================
+   FERMA TYPOGRAPHIC MARK (.ferma-mark)
+   Монохромная типографическая версия логотипа.
+   Повторяет композицию оригинального SVG:
+     ┌─ Старая ────────── ♥ с любовью ─┐
+     │           #Ферма                 │
+     └─────── зоотоваров ───────────────┘
+   Используется на тёмных секциях (hero, retail, ROI, CTA, footer),
+   где оригинальный цветной SVG выглядел бы как «наклейка».
+   На светлых секциях продолжаем использовать настоящий SVG.
+   ============================================ */
+.ferma-mark {
+  display: inline-grid;
+  grid-template-rows: auto auto auto;
+  align-items: center;
+  justify-items: center;
+  font-family: var(--font);
+  line-height: 1;
+  color: var(--ferma-logo);
+  --fm-base: 28px;
+  font-size: var(--fm-base);
+  user-select: none;
+  white-space: nowrap;
+}
+.ferma-mark .fm-top {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2em;
+  width: 100%;
+  padding: 0 0.15em;
+  margin-bottom: -0.05em;
+}
+.ferma-mark .fm-staraya {
+  font-size: 0.36em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(30, 34, 25, 0.55);
+}
+.ferma-mark .fm-loved {
+  font-size: 0.3em;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--ferma-orange-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.ferma-mark .fm-heart {
+  color: #E03847;
+  font-size: 1.1em;
+  display: inline-block;
+  transform: translateY(-0.05em);
+}
+.ferma-mark .fm-main {
+  font-size: 1em;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--ferma-logo);
+  line-height: 0.95;
+}
+.ferma-mark .fm-main .fm-hash {
+  color: var(--ferma-orange);
+  font-weight: 900;
+  margin-right: -0.05em;
+}
+.ferma-mark .fm-bot {
+  font-size: 0.3em;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(30, 34, 25, 0.6);
+  margin-top: 0.2em;
+  padding-left: 0.34em; /* compensate letter-spacing right offset */
+}
+
+/* Size variants */
+.ferma-mark--xs { --fm-base: 22px; }
+.ferma-mark--sm { --fm-base: 30px; }
+.ferma-mark--md { --fm-base: 46px; }
+.ferma-mark--lg { --fm-base: clamp(54px, 6.5vw, 92px); }
+
+/* Dark theme — auto on dark contexts */
+.nav.is-dark .ferma-mark,
+.section--dark .ferma-mark,
+.on-dark .ferma-mark,
+.footer .ferma-mark,
+.ferma-mark--dark {
+  color: var(--text-on-dark);
+}
+.nav.is-dark .ferma-mark .fm-staraya,
+.section--dark .ferma-mark .fm-staraya,
+.on-dark .ferma-mark .fm-staraya,
+.footer .ferma-mark .fm-staraya,
+.ferma-mark--dark .fm-staraya { color: rgba(242, 240, 237, 0.65); }
+
+.nav.is-dark .ferma-mark .fm-loved,
+.section--dark .ferma-mark .fm-loved,
+.on-dark .ferma-mark .fm-loved,
+.footer .ferma-mark .fm-loved,
+.ferma-mark--dark .fm-loved { color: var(--gold-warm); }
+
+.nav.is-dark .ferma-mark .fm-heart,
+.section--dark .ferma-mark .fm-heart,
+.on-dark .ferma-mark .fm-heart,
+.footer .ferma-mark .fm-heart,
+.ferma-mark--dark .fm-heart { color: var(--ferma-orange); }
+
+.nav.is-dark .ferma-mark .fm-main,
+.section--dark .ferma-mark .fm-main,
+.on-dark .ferma-mark .fm-main,
+.footer .ferma-mark .fm-main,
+.ferma-mark--dark .fm-main { color: var(--text-on-dark); }
+
+.nav.is-dark .ferma-mark .fm-bot,
+.section--dark .ferma-mark .fm-bot,
+.on-dark .ferma-mark .fm-bot,
+.footer .ferma-mark .fm-bot,
+.ferma-mark--dark .fm-bot { color: rgba(242, 240, 237, 0.55); }
+
+/* ===== FERMA LOGO IMG (реальный векторный логотип Фермы — для светлых секций) ===== */
+.logo-ferma-img {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: filter .35s var(--ease-out), transform .4s var(--ease-out);
+}
+.logo-ferma-img--sm { height: clamp(28px, 2.4vw, 36px); }
+.logo-ferma-img--md { height: clamp(44px, 4vw, 60px); }
+.logo-ferma-img--lg { height: clamp(64px, 8vw, 110px); }
+
+/* Light/dark brand switching (SVG имеет watercolor-фон, filter:invert даёт белый блок —
+   поэтому на тёмных секциях показываем текстовый wordmark вместо изображения) */
+.brand-when-dark, .brand-wordmark-dark { display: none; }
+.nav.is-dark .brand-when-light { display: none; }
+.nav.is-dark .brand-when-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  font-size: 13px;
+  color: var(--text-on-dark);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.nav.is-dark .brand-when-dark .fw-mark {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold-warm);
+  box-shadow: 0 0 0 2px rgba(197, 165, 114, 0.22);
+}
+/* Footer wordmark (тёмный фон) */
+.brand-wordmark-dark {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 12px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  font-size: clamp(18px, 1.6vw, 24px);
+  color: var(--text-on-dark);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.brand-wordmark-dark .fw-mark {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--gold-warm);
+  box-shadow: 0 0 0 3px rgba(197, 165, 114, 0.22);
+}
+.brand-wordmark-dark small {
+  font-size: 0.5em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--gold-warm);
+  text-transform: uppercase;
+}
+
+/* ===== FERMA WORDMARK (fallback текстовая версия — оставлено на случай если изображение не загрузится) ===== */
+.ferma-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ferma-logo);
+  white-space: nowrap;
+  line-height: 1;
+}
+.ferma-wordmark .fw-mark {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--ferma-green);
+  box-shadow: 0 0 0 3px rgba(123, 161, 72, 0.18);
+  flex-shrink: 0;
+}
+.ferma-wordmark--sm  { font-size: 13px; letter-spacing: 0.14em; }
+.ferma-wordmark--sm .fw-mark { width: 8px;  height: 8px; box-shadow: 0 0 0 2px rgba(123,161,72,0.2); }
+.ferma-wordmark--md  { font-size: 16px; }
+.ferma-wordmark--lg  { font-size: clamp(20px, 2vw, 28px); letter-spacing: 0.2em; }
+.ferma-wordmark--lg .fw-mark { width: 14px; height: 14px; box-shadow: 0 0 0 4px rgba(123,161,72,0.16); }
+.ferma-wordmark--nomark .fw-mark { display: none; }
+.ferma-wordmark--on-dark { color: var(--text-on-dark); }
+.ferma-wordmark--on-dark .fw-mark {
+  background: var(--gold-warm);
+  box-shadow: 0 0 0 3px rgba(197, 165, 114, 0.22);
+}
+.ferma-wordmark--on-light { color: var(--ferma-logo); }
+/* In dark nav state — auto-light text */
+.nav.is-dark .ferma-wordmark { color: var(--text-on-dark); }
+.nav.is-dark .ferma-wordmark .fw-mark {
+  background: var(--gold-warm);
+  box-shadow: 0 0 0 2px rgba(197, 165, 114, 0.22);
+}
+.nav-links {
+  display: none;
+  gap: var(--s-4);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.nav-links a {
+  opacity: 0.7;
+  transition: opacity .2s, color .2s;
+}
+.nav-links a:hover { opacity: 1; color: var(--ferma-green); }
+@media (min-width: 900px) {
+  .nav-links { display: flex; }
+}
+.nav-cta {
+  padding: 10px 20px;
+  border-radius: var(--r-pill);
+  background: var(--ferma-orange);
+  color: var(--ferma-white);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: background .2s, transform .2s;
+}
+.nav-cta:hover { background: var(--ferma-orange-dark); transform: translateY(-1px); }
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  padding: 14px 28px;
+  border-radius: var(--r-pill);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: all .25s var(--ease-out);
+}
+.btn--primary {
+  background: var(--ferma-orange);
+  color: var(--ferma-white);
+}
+.btn--primary:hover { background: var(--ferma-orange-dark); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255, 139, 28, 0.35); }
+.btn--green {
+  background: var(--ferma-green);
+  color: var(--ferma-white);
+}
+.btn--green:hover { background: var(--ferma-green-hover); }
+.btn--ghost {
+  border: 1.5px solid var(--ferma-outline);
+  color: var(--text-on-cream);
+}
+.btn--ghost:hover { border-color: var(--ferma-green); color: var(--ferma-green); }
+
+/* ===== PILL / BADGE ===== */
+.pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(123, 161, 72, 0.10);
+  color: var(--ferma-green-dark);
+  border: 1px solid rgba(123, 161, 72, 0.25);
+}
+.pill--orange { background: rgba(255, 139, 28, 0.10); color: var(--ferma-orange-dark); border-color: rgba(255, 139, 28, 0.3); }
+.pill--gold { background: rgba(197, 165, 114, 0.12); color: var(--gold-warm-dim); border-color: rgba(197, 165, 114, 0.3); }
+.pill--dark { background: rgba(30, 34, 25, 0.85); color: var(--text-on-dark); border-color: rgba(255,255,255,0.1); }
+
+/* ===== REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity 1s var(--ease-out), transform 1s var(--ease-out); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-stagger > * { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.reveal-stagger.is-visible > * { opacity: 1; transform: translateY(0); }
+
+/* Word-by-word headline reveal — premium "wave" entry */
+.display-h1 .word,
+.display-h2 .word,
+.hero-title .word {
+  display: inline-block;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Stagger cards — animated via clip-path WIPE reveal (premium curtain) */
+.reveal-stagger > * {
+  will-change: transform, opacity, clip-path;
+}
+
+/* Cards eligible for 3D tilt — set up perspective context once */
+.fact-card, .case-metric, .stm-card, .brand-card, .pkg-card,
+.bench-card, .pkg-detail, .pkg-solo-card, .omni-card, .act-card,
+.three-stat-cell, .pkg-solo-result, .audience-card, .threecol-card,
+.rhythm-card, .agenda-item, .tool-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow .4s var(--ease-out), border-color .4s var(--ease-out);
+}
+.fact-card:hover, .case-metric:hover, .stm-card:hover, .brand-card:hover,
+.bench-card:hover, .pkg-solo-card:hover, .omni-card:hover, .act-card:hover {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+  border-color: var(--ferma-green);
+}
+.section--dark .omni-card:hover,
+.section--dark .act-card:hover {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  border-color: var(--gold-warm);
+}
+
+/* Magnetic CTA — smooth follow-through */
+.nav-cta, .btn--primary, .btn--green {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: var(--s-7) 0 var(--s-5);
+  background: var(--ferma-logo);
+  border-top: 1px solid var(--outline-on-dark);
+  color: var(--text-on-dark-muted);
+  font-size: 13px;
+  text-align: center;
+}
+.footer strong { color: var(--text-on-dark); }
+.footer .brands-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--s-5);
+  margin-bottom: var(--s-5);
+  opacity: 0.85;
+}
+.footer .brands-row { display: flex; align-items: center; justify-content: center; gap: var(--s-3); flex-wrap: wrap; }
+.footer .ferma-wordmark--lg { font-size: clamp(18px, 1.6vw, 24px); letter-spacing: 0.22em; }
+.footer-valta-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(197, 165, 114, 0.18);
+  border-radius: 10px;
+}
+.footer-valta-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 6px;
+  min-width: 84px;
+  height: 32px;
+}
+.footer-valta-cell img { max-height: 22px; max-width: 80px; width: auto; }
