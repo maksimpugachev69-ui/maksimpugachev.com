@@ -1099,4 +1099,14 @@ html:not(.js-ok) .emb-deck .sctl > :not(.emb-open) { display: none; }   /* witho
   html:lang(en) .fig-0 dt { font-size: min(80px, 5.5vw); }
   html:lang(en) .fig:not(.fig-0) dt { font-size: 23px; }
 }
-@media (max-width: 339px) { html:lang(en) .name { display: none; } html:lang(en) .lang { margin-left: 0; } html:lang(en) .btn-sm { margin-left: auto; } }
+@media (max-width: 339px) { html:lang(en) .name { display: block; } html:lang(en) .lang { margin-left: 0; } html:lang(en) .btn-sm { margin-left: auto; } }
+/* review 25.10: on a phone the header button keeps one word, «Telegram», so the name has air (the full label stays as the accessible name) */
+@media (max-width: 480px) {
+  html .top .btn-sm, html:lang(en) .top .btn-sm { font-size: 0; padding: 0 12px; }
+  .top .btn-sm::after { content: "Telegram"; font-size: 13px; }
+}
+@media (max-width: 379px) { .top .btn-sm::after { font-size: 12px; } }
+/* review 25.10: Itana — the paragraph plus five results under it, same voice as .earlier */
+.earlier-l { margin: 12px 0 0; padding-left: 1.2em; max-width: 52em; display: grid; gap: 6px; font: 400 var(--fs-m)/1.5 var(--f-text); color: var(--ink-2); }
+.earlier-l li::marker { color: var(--accent); }
+.earlier-l { list-style: disc outside; } .earlier-l li { display: list-item; }

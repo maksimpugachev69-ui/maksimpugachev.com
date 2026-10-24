@@ -1296,3 +1296,20 @@
     } catch (err) { root.classList.remove("anim"); root.classList.add("ready"); }
   }
 })();
+
+/* a bar's value label never leaves its track's reserved room: the English «RUB 900–1,200» is wider than «900–1200 ₽» (review 25.10) — the label steps its size down to fit */
+(function () {
+  function fit() {
+    document.querySelectorAll(".trk .v").forEach(function (v) {
+      var trk = v.parentNode;
+      v.style.fontSize = "";
+      var room = trk.clientWidth + (parseFloat(getComputedStyle(trk).marginRight) || 0) - v.offsetLeft - 2;
+      if (room > 0 && v.offsetWidth > room) v.style.fontSize = (parseFloat(getComputedStyle(v).fontSize) * room / v.offsetWidth).toFixed(1) + "px";
+    });
+  }
+  var t;
+  function later() { clearTimeout(t); t = setTimeout(fit, 120); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  window.addEventListener("load", fit);
+  window.addEventListener("resize", later);
+})();
