@@ -542,8 +542,8 @@ html.anim .lv .ml .mk, html.anim .lv .bg .mk, html.anim .lv .fun-a .mk { stroke-
 @media (max-width: 640px) {
   html.anim:not(.ready) .card.is-up { visibility: visible; }
   html.anim:not(.ready) .dtab, .stage.moving .dtab { visibility: hidden; }
-  /* phone: the numbers on the drawing are labels (31 × 14 px, no room for 44 × 44); the list rows under the drawer open the cards (S14, 24.10) */
-  .dtab { pointer-events: none; cursor: default; }
+  /* phone: the numbers on the drawing open the cards too — Maxim taps them first (25.10); the hit area grows to ≈ 44 px tall, the list rows stay as the second way */
+  .dtab::before { inset: -16px -2px -12px; }
   .dtab:hover { background: transparent; color: var(--ink); }
 }
 @media (max-width: 359px) {

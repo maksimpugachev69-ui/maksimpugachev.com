@@ -363,15 +363,7 @@
     tl.add(function () { settleCard(card); }, t + 0.05);
   }
   tabBtns.forEach(function (b, i) { b.addEventListener("click", function () { toggle(i); }); });
-  /* phone: the drawing's numbers are labels, the list rows are the buttons (one target per work, 44 × 44) */
-  function tabsRole() {
-    tabBtns.forEach(function (b) {
-      if (desk.matches) { b.removeAttribute("tabindex"); b.removeAttribute("aria-hidden"); b.disabled = false; }
-      else { b.setAttribute("tabindex", "-1"); b.setAttribute("aria-hidden", "true"); b.disabled = true; }   /* a label on the phone, not a control */
-    });
-  }
-  tabsRole();
-  if (desk.addEventListener) desk.addEventListener("change", tabsRole); else if (desk.addListener) desk.addListener(tabsRole);
+  /* phone too: the drawing's numbers open the cards (Maxim, 25.10); the list rows under the drawer are the second way */
   rowBtns.forEach(function (b, i) {
     b.addEventListener("click", function () {
       var r = stage.getBoundingClientRect();
