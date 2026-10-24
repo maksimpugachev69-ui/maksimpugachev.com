@@ -14,6 +14,15 @@
   function $$(sel, el) { return Array.prototype.slice.call((el || document).querySelectorAll(sel)); }
 
   root.classList.add("js-ok");
+  /* Р-361: one script for / and /en/ — interface strings and number typography by the page's lang */
+  var EN = /^en/.test(root.lang);
+  var L = EN
+    ? { loading: "loading…", deck: "Partnership presentation for a supplier", full: "Work in full screen", close: "Close", hintDeck: "View the presentation", hintLive: "View it live" }
+    : { loading: "загружается…", deck: "Партнёрская презентация для поставщика", full: "Работа на весь экран", close: "Закрыть", hintDeck: "Смотреть презентацию", hintLive: "Смотреть вживую" };
+  /* the switch remembers the reader's choice; only the Russian root reads it (head script), never the browser language */
+  $$("[data-lang]").forEach(function (a) {
+    a.addEventListener("click", function () { try { localStorage.setItem("lang", a.getAttribute("data-lang")); } catch (err) {} });
+  });
   var stage = $("#stage");
   if (!stage) return;
   var cam = $("#cam"), drawin = $(".drawin", stage), artimg = $("#artimg"), artfront = $("#artfront"), nib = $("#nib"), pulls = $(".pulls", stage), dtabs = $(".dtabs", stage);
@@ -58,18 +67,23 @@
   function fromOf(b) { return parseFloat(b.getAttribute("data-from")) || 0; }
 
   /* ------------------------------------------------ counters on an aria-hidden overlay copy (the real number stays in the DOM, hidden with visibility while counting) */
-  var NUM = /\d+(?:[  ]\d{3})*(?:,\d+)?/g;
+  var NUM = EN ? /\d+(?:,\d{3})*(?:\.\d+)?/g : /\d+(?:[  ]\d{3})*(?:,\d+)?/g, DEC = EN ? "." : ",";
   function fmtTok(t, v) {
     var p = Math.abs(v).toFixed(t.dec).split(".");
     if (t.sep) p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, t.sep);
-    return p.join(",");
+    return p.join(DEC);
+  }
+  function numTok(s) {
+    return EN
+      ? { to: parseFloat(s.replace(/,/g, "")), dec: (s.split(".")[1] || "").length, sep: s.indexOf(",") >= 0 ? "," : "" }
+      : { to: parseFloat(s.replace(/[  ]/g, "").replace(",", ".")), dec: (s.split(",")[1] || "").length, sep: (s.match(/[  ]/) || [""])[0] };
   }
   /* from: array (per number in the text) or one number; returns { run(tl, at, dur, ease), finish() } */
   function counter(el, from) {
     if (!el || el.__cnt || !animMode) return null;
     var txt = el.textContent, toks = [], m;
     NUM.lastIndex = 0;
-    while ((m = NUM.exec(txt))) toks.push({ i: m.index, len: m[0].length, to: parseFloat(m[0].replace(/[  ]/g, "").replace(",", ".")), dec: (m[0].split(",")[1] || "").length, sep: (m[0].match(/[  ]/) || [""])[0] });
+    while ((m = NUM.exec(txt))) { var nt = numTok(m[0]); nt.i = m.index; nt.len = m[0].length; toks.push(nt); }
     if (!toks.length) return null;
     var ov = document.createElement("span"), proxy = { p: 0 }, posSet = false;
     ov.className = "cnt"; ov.setAttribute("aria-hidden", "true");
@@ -902,7 +916,7 @@
     if (!ld) {
       ld = document.createElement("span");
       ld.className = "emb-ld"; ld.setAttribute("aria-hidden", "true");
-      ld.innerHTML = '<span class="emb-ld-t">загружается…</span><span class="emb-ld-b"><i></i></span>';
+      ld.innerHTML = '<span class="emb-ld-t">' + L.loading + '</span><span class="emb-ld-b"><i></i></span>';
       host.appendChild(ld);
     }
     var i = $("i", ld);
@@ -924,7 +938,7 @@
     if (e._f) { if (cb) { if (e._ready) cb(); else e._q.push(cb); } return; }
     var f = document.createElement("iframe");
     var cap = e.closest("figure") ? $("figcaption", e.closest("figure")) : null;
-    f.title = cap ? cap.firstChild.textContent.trim() : "Партнёрская презентация для поставщика";
+    f.title = cap ? cap.firstChild.textContent.trim() : L.deck;
     f.style.width = e.getAttribute("data-w") + "px";
     f.style.height = e.getAttribute("data-h") + "px";
     f.setAttribute("tabindex", "-1");
@@ -1000,7 +1014,7 @@
     if (!embDlg) {
       embDlg = document.createElement("dialog");
       embDlg.className = "zoomd embd";
-      embDlg.innerHTML = '<img class="embd-po" alt=""><iframe title="Работа на весь экран"></iframe><button class="zd-x" type="button" aria-label="Закрыть">×</button>';
+      embDlg.innerHTML = '<img class="embd-po" alt=""><iframe title="' + L.full + '"></iframe><button class="zd-x" type="button" aria-label="' + L.close + '">×</button>';
       document.body.appendChild(embDlg);
       $(".zd-x", embDlg).addEventListener("click", function () { embDlg.close(); });
       embDlg.addEventListener("close", function () { var f0 = $("iframe", embDlg); f0.onload = null; f0.removeAttribute("src"); embDlg.classList.remove("is-live"); });
@@ -1103,7 +1117,7 @@
       open.addEventListener("click", function (ev) { stopAuto(true); embFull(e, ev); });
       e._onOn = function () { stopAuto(true); };
       if (embPhone()) {
-        hint.textContent = "Смотреть презентацию";
+        hint.textContent = L.hintDeck;
         sh.addEventListener("click", function () { embDialog(e); });
         prev.hidden = next.hidden = play.hidden = true;
         $(".scount", blk).hidden = true; $(".sprog", blk).hidden = true;
@@ -1168,7 +1182,7 @@
         e._onOff = function () { it.hold = false; if (it.tl) { measure(); cycle(here(), 0.6); } };
         var sh = $(".emb-sh", e), hint = $(".emb-hint", e);
         if (embPhone()) {
-          hint.textContent = "Смотреть вживую";
+          hint.textContent = L.hintLive;
           sh.addEventListener("click", function () {
             if (!e._f) {   /* one press wakes every screen of the block */
               items.forEach(function (x) { if (!x.e._f) { x.e.classList.add("is-asked"); embLoad(x.e, x.start); } });
@@ -1203,7 +1217,7 @@
     if (!links.length || typeof HTMLDialogElement !== "function") return;
     var dlg = document.createElement("dialog"), back = null;
     dlg.className = "zoomd";
-    dlg.innerHTML = '<div class="zd-in"><img alt=""></div><button class="zd-x" type="button" aria-label="Закрыть">×</button>';
+    dlg.innerHTML = '<div class="zd-in"><img alt=""></div><button class="zd-x" type="button" aria-label="' + L.close + '">×</button>';
     document.body.appendChild(dlg);
     var img = $("img", dlg);
     function close() { dlg.close(); }
