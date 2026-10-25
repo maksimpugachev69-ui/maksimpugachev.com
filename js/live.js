@@ -668,6 +668,8 @@
     var tabs = $$(".wk-t", wk), panels = $$(".wk-p", wk);
     if (!tabs.length) return;
     var stamp = $(".wk-stamp", wk), fx = $$(".wk-fx li", wk), leg = $(".wk-leg", wk), low = $$(".wk-low > *", wk), ai = $(".wk-ai span", wk);
+    var more = $(".wk-more", wk);
+    if (more) more.open = false;   /* the task layer is open in the markup (seen without JS), a layer under one line with JS (S9b 25.10) */
     var cur = 0, rowsTl = null, entered = false;
     function rowsIn(panel) {
       if (rowsTl) rowsTl.progress(1);
@@ -752,8 +754,8 @@
   /* ------------------------------------------------ works 02–06 (Р-329) and the live part (Р-338) */
   function worksMotion() {
     if (!animMode || !ST) return;
-    var org = $("[data-x5]");
-    if (org) {
+    /* Х5 in ferma-team and Х11 in itana: the pen grows the team out of the photo — trunk, then a branch to each department */
+    $$("[data-x5], [data-x11]").forEach(function (org) {
       var trs = $$(".tr", org), brs = $$(".brn", org);
       gsap.set(trs, { scaleY: 0 }); gsap.set(brs, { scaleX: 0 });
       onEnter(org, function () {
@@ -762,6 +764,15 @@
         brs.forEach(function (b, i) { tl.to(b, { scaleX: 1, duration: 0.3, ease: "power2.out" }, i * 0.2 + 0.14); });
         tl.add(function () { gsap.set(trs.concat(brs), { clearProps: "transform" }); });
       });
+    });
+    /* Х12 in itana: «8 площадок» is counted out — the eight platform names ink in one by one, left to right (≈ 1.3 s) */
+    var plat = $("[data-x12]");
+    if (plat) {
+      var pls = $$(".pl", plat);
+      gsap.set(pls, { opacity: 0.6, y: 6 });
+      onEnter(plat, function () {
+        gsap.to(pls, { opacity: 1, y: 0, duration: 0.4, stagger: 0.13, ease: "power2.out", onComplete: function () { gsap.set(pls, { clearProps: "transform,opacity" }); } });
+      }, "top 85%");
     }
     var rh = $("[data-x5b]");
     if (rh) {
@@ -1159,7 +1170,8 @@
           if (!animMode || !measure()) return;
           var H = +e.getAttribute("data-h"), dur = Math.max(10, 2.6 * it.max / H);   /* ~2.6 s a screen: each of the site's scenes is seen as an event */
           it.p.v = from;
-          it.tl = gsap.timeline({ paused: true, onComplete: function () { cycle(0, 1.5); } });
+          /* from the top it is a native loop (repeat -1): the shot reads it as a loop, not as a drawing still in progress; after a hover the rest of the pass, then the loop */
+          it.tl = from > 0 ? gsap.timeline({ paused: true, onComplete: function () { cycle(0, 1.5); } }) : gsap.timeline({ paused: true, repeat: -1 });
           it.tl.to({}, { duration: wait })
             .add(measure)
             .to(it.p, { v: 1, duration: dur * (1 - from) + 0.01, ease: from > 0 ? "sine.out" : "sine.inOut", onUpdate: put })
@@ -1238,7 +1250,7 @@
     if (!("IntersectionObserver" in window)) return;
     var tabs = $$(".tabs .tab"), map = {};
     tabs.forEach(function (t) { map[t.getAttribute("href").slice(1)] = t; });
-    var secs = ["ferma", "ferma-team", "stm", "deck", "factory", "floor", "antishkola"].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    var secs = ["ferma", "ferma-team", "stm", "deck", "factory", "floor", "itana", "antishkola"].map(function (id) { return document.getElementById(id); }).filter(Boolean);
     var io = new IntersectionObserver(function () {
       var mid = window.innerHeight * 0.4, on = null;
       secs.forEach(function (s) { var r = s.getBoundingClientRect(); if (r.top <= mid && r.bottom > mid) on = s.id === "ferma-team" ? "ferma" : s.id; });

@@ -9,6 +9,11 @@
   .org-i { flex-wrap: wrap; row-gap: 2px; }
   .oc-t { flex: 1 1 100%; margin-left: 0; text-align: left; }
 }
+/* S14: platform list wraps without a dot at the line end (check-lines): the dots are drawn as rules */
+.plat { font-size: 0; display: flex; flex-wrap: wrap; row-gap: 2px; }
+.plat .pl { font-size: var(--fs-s); white-space: nowrap; padding-right: .65em; margin-right: .65em; border-right: 1px solid var(--ink-3); line-height: 1.2; }
+.plat .pl:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.lang-a { min-width: 44px; }
 .sb { display: grid; place-items: center; }
 .sb svg { display: block; }
 /* S14: skip link */
