@@ -80,6 +80,8 @@
   }
   /* from: array (per number in the text) or one number; returns { run(tl, at, dur, ease), finish() } */
   function counter(el, from) {
+    /* 13.11.2026 (audit 41 §5 p.12): numbers show their final value at once; only bars, rings and arrows move */
+    return null;
     if (!el || el.__cnt || !animMode) return null;
     var txt = el.textContent, toks = [], m;
     NUM.lastIndex = 0;
