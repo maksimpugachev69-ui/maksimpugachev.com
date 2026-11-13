@@ -114,7 +114,7 @@
 /* Old brand row — hidden in favor of partnership composition */
 .hero-brands-row { display: none; }
 
-/* ===== Hero partnership composition — Ferma BIG × Valta brand group ===== */
+/* ===== Hero partnership composition — Ferma BIG × partner brand group ===== */
 .hero-partnership {
   display: flex;
   align-items: center;
@@ -144,7 +144,7 @@
   line-height: 1;
   align-self: center;
 }
-.hp-valta-group {
+.hp-partner-group {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
@@ -154,7 +154,7 @@
   border-radius: 14px;
   backdrop-filter: blur(14px);
 }
-.hp-valta-cell {
+.hp-partner-cell {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,7 +164,7 @@
   min-width: 100px;
   height: 40px;
 }
-.hp-valta-cell img {
+.hp-partner-cell img {
   max-height: 30px;
   max-width: 100px;
   width: auto;

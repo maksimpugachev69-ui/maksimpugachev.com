@@ -1,5 +1,5 @@
 /* ============================================
-   Ferma × Valta v5 — slide-by-slide deck
+   Ferma × supplier v5 — slide-by-slide deck
    No pin-scrub. Snap navigation via wheel / keyboard / touch / arrows.
    ============================================ */
 
@@ -469,7 +469,7 @@ function drawSankey(budgetMln) {
     cursorDst += outThick + 4;
   });
   const srcRect = `<rect x="${srcX}" y="${srcTop + (usableH - srcThickness) / 2}" width="100" height="${srcThickness}" rx="10" fill="#1A1815" stroke="#C5A572" stroke-width="1.5"/>`;
-  const srcLabel = `<text x="${srcX + 50}" y="${srcTop + usableH / 2 - 8}" font-family="Montserrat" font-size="12" font-weight="700" fill="#C5A572" text-anchor="middle">БЮДЖЕТ</text><text x="${srcX + 50}" y="${srcTop + usableH / 2 + 18}" font-family="Montserrat" font-size="22" font-weight="800" fill="#F2F0ED" text-anchor="middle">${budgetMln}</text><text x="${srcX + 50}" y="${srcTop + usableH / 2 + 36}" font-family="Montserrat" font-size="11" fill="#F2F0ED" text-anchor="middle">млн ₽</text>`;
+  const srcLabel = `<text x="${srcX + 50}" y="${srcTop + usableH / 2 - 8}" font-family="Montserrat" font-size="12" font-weight="700" fill="#C5A572" text-anchor="middle">БЮДЖЕТ</text><text x="${srcX + 50}" y="${srcTop + usableH / 2 + 18}" font-family="Montserrat" font-size="22" font-weight="800" fill="#F2F0ED" text-anchor="middle">•••</text><text x="${srcX + 50}" y="${srcTop + usableH / 2 + 36}" font-family="Montserrat" font-size="11" fill="#F2F0ED" text-anchor="middle">млн ₽</text>`;
   const total = `<text x="${dstX + 10}" y="${H - 8}" font-family="Montserrat" font-size="12" fill="#FF8B1C" font-weight="800">Итого +••• млн ₽</text>`;
   svg.innerHTML = parts + srcRect + srcLabel + labels + total;
   return totalRevenue;
@@ -478,7 +478,7 @@ function recomputeROI() {
   const slider = document.getElementById('budget');
   if (!slider) return;
   const budget = parseInt(slider.value);
-  document.getElementById('budget-val').textContent = budget;
+  document.getElementById('budget-val').textContent = '•••';
   const revenue = drawSankey(budget);
   const multiplier = revenue / budget;
   const romi = ((revenue - budget) / budget * 100);
@@ -520,8 +520,8 @@ function boot() {
   attachMagnetic(document.querySelector('.nav-cta'), 0.4);
   document.querySelectorAll('.btn--primary, .btn--green').forEach(el => attachMagnetic(el, 0.3));
 
-  // 3D tilt on hero partnership cells + Valta logo cards
-  attachTilt(document.querySelectorAll('.hp-valta-cell, .hp-valta-group'));
+  // 3D tilt on hero partnership cells + brand logo cards
+  attachTilt(document.querySelectorAll('.hp-partner-cell, .hp-partner-group'));
 }
 
 /* ---------- INTRO ANIMATION ----------

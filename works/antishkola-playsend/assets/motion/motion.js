@@ -2,7 +2,7 @@
  * Antishkola Motion Library — v1.0
  * Drop-in, declarative motion engine for landing pages.
  *
- * Consolidated from the summer-2026 and supplier-valta landings.
+ * Consolidated from the summer-2026 and supplier landings.
  * Every effect is opt-in via a data-* attribute, degrades gracefully when
  * GSAP/Lenis are absent, and is fully disabled under prefers-reduced-motion
  * and on coarse-pointer (touch) devices where it would feel like a bug.
