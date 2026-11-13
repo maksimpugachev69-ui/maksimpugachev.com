@@ -737,7 +737,7 @@
 .brand-action p { font-size: 14px; line-height: 1.5; color: var(--text-on-cream-brown); margin: 0; }
 .brand-action .effect { font-size: 12px; font-weight: 600; color: var(--ferma-green-dark); margin-top: 6px; }
 
-/* ===== AWARD activations (S19) — 7 cards ===== */
+/* ===== Brand activations (S19) — 7 cards ===== */
 .activation-grid {
   display: grid;
   grid-template-columns: 1fr;

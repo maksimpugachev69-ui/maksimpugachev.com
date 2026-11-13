@@ -492,7 +492,7 @@ function boot() {
   document.body.classList.add('horizontal-mode');
   // Run intro after fonts/images load briefly so nav layout is stable
   setTimeout(playIntroAnimation, 100);
-  tryLoadVideo('hero-video', 'media/video/award-hero.mp4');
+  /* hero video removed for the portfolio build */
   const slider = document.getElementById('budget');
   if (slider) {
     slider.addEventListener('input', recomputeROI);
@@ -586,7 +586,7 @@ function playIntroAnimation() {
 
 if (isMobile || isReduced) {
   // Vertical fallback — set up scroll-triggered reveals on all slides
-  tryLoadVideo('hero-video', 'media/video/award-hero.mp4');
+  /* hero video removed for the portfolio build */
   gsap.utils.toArray('.reveal:not(.reveal-stagger), .display-h1, .display-h2').forEach(el => {
     gsap.set(el, { opacity: 0, y: 30 });
     ScrollTrigger.create({ trigger: el, start: 'top 88%', once: true,

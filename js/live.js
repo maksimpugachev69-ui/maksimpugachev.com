@@ -1057,7 +1057,7 @@
       var e = $(".emb", blk), sh = $(".emb-sh", e), hint = $(".emb-hint", e);
       var n = $(".sc-n", blk), tot = $(".sc-t", blk), prev = $(".sb-p", blk), next = $(".sb-n", blk), play = $(".sb-play", blk), prog = $(".sprog i", blk);
       var chs = $$(".dch", blk), open = $(".emb-open", blk);
-      var cur = 0, count = 32, auto = null, stopped = !animMode, inView = false, started = false;
+      var cur = 0, count = 5, auto = null, stopped = !animMode, inView = false, started = false;
       function doc() { var w = embWin(e); return w ? w.document : null; }
       function vert() { var w = embWin(e); return !w || w.matchMedia("(max-width: 900px), (pointer: coarse), (prefers-reduced-motion: reduce)").matches; }
       function ui() {
